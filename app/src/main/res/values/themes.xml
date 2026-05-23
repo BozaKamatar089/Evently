@@ -9,4 +9,12 @@
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorSurface">@color/colorSurface</item>
     </style>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Pozadina ekrana pri paljenju -->
+        <item name="windowSplashScreenBackground">#FFFFFF</item>
+        <!-- Ikona koja će se prikazati na sredini -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
+        <!-- Nakon učitavanja prebaci na ovu tvoju glavnu temu (provjeri kako se zove tvoja tema, obično je Theme.Evently) -->
+        <item name="postSplashScreenTheme">@style/Theme.Evently</item>
+    </style>
 </resources>

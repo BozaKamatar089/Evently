@@ -10,9 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Evently" >
+        android:theme="@style/Theme.App.Starting" >
         <activity
             android:name=".ui.auth.RegisterActivity"
+            android:theme="@style/Theme.Evently"
             android:exported="false" />
         <activity
             android:name=".ui.auth.MainActivity"
