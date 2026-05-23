@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Toast.makeText(this, "Otvaram Home ekran...", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, com.example.evently.home.HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
