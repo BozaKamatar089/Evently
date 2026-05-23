@@ -1,14 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#FFF3E0"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
+    android:background="?attr/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Moj Profil"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Slika profila -->
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_profile"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#BDBDBD"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/ic_home"
+                android:backgroundTint="?attr/colorSurface"
+                app:tint="#1E88E5"/>
+        </FrameLayout>
+
+        <!-- Ime i Prezime -->
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Korisnik"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface" />
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/tvUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="ucitavanje@email.com"
+            android:textSize="14sp"
+            android:textColor="#757575" />
+
+        <!-- Broj telefona -->
+        <TextView
+            android:id="@+id/tvUserPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Telefon: Nije povezan"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#1E88E5" />
+
+        <!-- Datum rođenja -->
+        <TextView
+            android:id="@+id/tvDob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Datum rođenja: Nije postavljeno"
+            android:textSize="16sp"
+            android:textColor="#757575" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"/>
+
+
+        <!-- Dugmad za akcije -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChangePassword"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Promjena lozinke"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="#BDBDBD"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChangeEmail"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:text="Promjena e-maila"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="#BDBDBD"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVerifyPhone"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:text="Potvrdi broj telefona"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="#BDBDBD"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSetDob"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:text="Postavi datum rođenja"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="#BDBDBD"/>
+
+        <!-- Dugme za odjavu -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="Odjavi se"
+            android:textColor="#D32F2F"
+            app:strokeColor="#D32F2F" />
+
+    </LinearLayout>
+</ScrollView>

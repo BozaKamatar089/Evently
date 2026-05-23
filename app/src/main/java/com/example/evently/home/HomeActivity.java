@@ -3,6 +3,8 @@ package com.example.evently.home;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.example.evently.home.ProfileFragment;
 import com.example.evently.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
