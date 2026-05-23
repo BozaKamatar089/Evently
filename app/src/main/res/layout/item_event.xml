@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Slika Događaja -->
+        <ImageView
+            android:id="@+id/ivEventItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:background="#EEEEEE"
+            android:src="@android:drawable/ic_menu_report_image"/>
+
+        <!-- Detalji ispod slike -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvEventItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Naziv događaja"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:id="@+id/tvEventItemDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Datum: 25.05.2026."
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="#757575"/>
+
+            <TextView
+                android:id="@+id/tvEventItemLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lokacija: Sarajevo"
+                android:layout_marginTop="2dp"
+                android:textSize="14sp"
+                android:textColor="#757575"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

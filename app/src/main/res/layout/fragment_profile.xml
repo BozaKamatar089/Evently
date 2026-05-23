@@ -126,6 +126,15 @@
             android:textColor="?attr/colorOnSurface"
             app:strokeColor="#BDBDBD"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnToggleRole"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:text="Postani Organizator"
+            android:backgroundTint="#4CAF50" />
+
         <!-- Dugme za odjavu -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"

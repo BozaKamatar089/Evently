@@ -113,7 +113,7 @@ public class ProfileFragment extends Fragment {
         MaterialButton btnSetDob = view.findViewById(R.id.btnSetDob);
         MaterialButton btnLogout = view.findViewById(R.id.btnLogout);
 
-        // --- Prikaz podataka (Firebase + Room) ---
+
         if (currentUser != null) {
             if (currentUser.getEmail() != null) tvUserEmail.setText(currentUser.getEmail());
             if (currentUser.getDisplayName() != null && !currentUser.getDisplayName().isEmpty()) {
@@ -127,7 +127,6 @@ public class ProfileFragment extends Fragment {
                 btnVerifyPhone.setVisibility(View.GONE);
             }
 
-            // UČITAVANJE IZ ROOM BAZE (Slika i Datum)
             if (localProfile.dateOfBirth != null) {
                 tvDob.setText("Datum rođenja: " + localProfile.dateOfBirth);
             }
@@ -139,7 +138,6 @@ public class ProfileFragment extends Fragment {
 
         ivProfileImage.setOnClickListener(v -> galleryLauncher.launch("image/*"));
 
-        // --- DATUM ROĐENJA ---
         btnSetDob.setOnClickListener(v -> {
             MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Odaberite datum rođenja")
@@ -160,6 +158,40 @@ public class ProfileFragment extends Fragment {
             });
 
             datePicker.show(getChildFragmentManager(), "DOB_PICKER");
+        });
+
+        com.google.android.material.button.MaterialButton btnToggleRole = view.findViewById(R.id.btnToggleRole);
+
+
+        android.content.SharedPreferences prefs = requireActivity().getSharedPreferences("AppPrefs", android.content.Context.MODE_PRIVATE);
+        boolean currentlyOrganizer = prefs.getBoolean("isOrganizer", false);
+
+
+        if (currentlyOrganizer) {
+            btnToggleRole.setText("Vrati se na ulogu Korisnika");
+            btnToggleRole.setBackgroundColor(android.graphics.Color.parseColor("#FF9800"));
+        } else {
+            btnToggleRole.setText("Postani Organizator");
+            btnToggleRole.setBackgroundColor(android.graphics.Color.parseColor("#4CAF50"));
+        }
+
+
+        btnToggleRole.setOnClickListener(v -> {
+            boolean newRole = !prefs.getBoolean("isOrganizer", false);
+
+
+            prefs.edit().putBoolean("isOrganizer", newRole).apply();
+
+
+            if (newRole) {
+                btnToggleRole.setText("Vrati se na ulogu Korisnika");
+                btnToggleRole.setBackgroundColor(android.graphics.Color.parseColor("#FF9800"));
+                android.widget.Toast.makeText(getContext(), "Sada ste Organizator!", android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                btnToggleRole.setText("Postani Organizator");
+                btnToggleRole.setBackgroundColor(android.graphics.Color.parseColor("#4CAF50"));
+                android.widget.Toast.makeText(getContext(), "Sada ste Korisnik!", android.widget.Toast.LENGTH_SHORT).show();
+            }
         });
 
         btnChangeEmail.setOnClickListener(v -> {

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    tools:context=".home.EventDetailsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:background="#E0E0E0"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:background="#FFFFFF"
+                android:elevation="8dp">
+
+                <TextView
+                    android:id="@+id/tvDetailName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ime Događaja"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="#212121"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvDetailDateLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="25. Maj 2024 • Sarajevo (Dom Mladih)"
+                    android:textSize="16sp"
+                    android:textColor="#757575"
+                    android:layout_marginBottom="16dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O Događaju"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#212121"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvDetailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ovdje ide opis događaja..."
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="24dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="#EEEEEE"
+                        android:padding="12dp"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Učesnici"
+                            android:textSize="14sp"
+                            android:textColor="#757575"/>
+                        <TextView
+                            android:id="@+id/tvParticipantsCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 / 100"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="#EEEEEE"
+                        android:padding="12dp"
+                        android:layout_marginStart="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Volonteri"
+                            android:textSize="14sp"
+                            android:textColor="#757575"/>
+                        <TextView
+                            android:id="@+id/tvVolunteersCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 / 20"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvStatusMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Već ste prijavljeni."
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#4CAF50"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- DUGMAD ZA ORGANIZATORA (Uredi / Izbriši) -->
+                <LinearLayout
+                    android:id="@+id/layoutOrganizerButtons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:layout_marginBottom="16dp"
+                    android:weightSum="2">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditEvent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="Uredi"
+                        android:backgroundTint="#FF9800"
+                        app:cornerRadius="8dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDeleteEvent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Izbriši"
+                        android:backgroundTint="#F44336"
+                        app:cornerRadius="8dp" />
+                </LinearLayout>
+
+                <!-- DUGMAD ZA UČESNIKA (Prijavi se) -->
+                <LinearLayout
+                    android:id="@+id/layoutButtons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnJoinParticipant"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Prijavi se kao Učesnik"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnJoinVolunteer"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Prijavi se kao Volonter"
+                        app:strokeColor="@color/design_default_color_primary"
+                        app:cornerRadius="12dp"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBarDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

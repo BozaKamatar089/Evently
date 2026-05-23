@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         authViewModel.getUser().observe(this, firebaseUser -> {
             if (firebaseUser != null) {
-                // Dodajemo ime i prezime u Firebase profil korisnika
+
                 String fullName = etFirstName.getText().toString().trim() + " " + etLastName.getText().toString().trim();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(fullName)
@@ -105,20 +105,19 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            // NAPOMENA: Broj telefona ovdje samo čitamo, a kasnije ćemo ga (kao i sve ostale
-            // podatke korisnika) čuvati u Room ili Firestore bazi kada je budemo pravili.
+
 
             progressBar.setVisibility(View.VISIBLE);
             authViewModel.register(email, password);
         });
 
         tvGoToLogin.setOnClickListener(v -> {
-            finish(); // Zatvara RegisterActivity i vraća nas na Login ekran
+            finish();
         });
     }
 
     private void goToHome() {
-        // Za sada samo Toast, kasnije otvara HomeActivity
+
         Toast.makeText(this, "Otvaram Home ekran...", Toast.LENGTH_SHORT).show();
         finish();
     }
