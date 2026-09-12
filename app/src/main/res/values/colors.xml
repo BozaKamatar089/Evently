@@ -1,17 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1E88E5</color>
-    <color name="colorPrimaryVariant">#1565C0</color>
+    <!-- ============================================================
+         PRIMITIVE TOKENS — Raw values (never used directly in layouts)
+         ============================================================ -->
+
+    <!-- Professional Blue Scale -->
+    <color name="blue_50">#E8F3FF</color>
+    <color name="blue_100">#D0E6FF</color>
+    <color name="blue_200">#A3CCFF</color>
+    <color name="blue_300">#6EB0FF</color>
+    <color name="blue_400">#3D90FF</color>
+    <color name="blue_500">#1E73BE</color>
+    <color name="blue_600">#155AA3</color>
+    <color name="blue_700">#0D4278</color>
+    <color name="blue_800">#082E52</color>
+    <color name="blue_900">#041A30</color>
+
+    <!-- Neutral / Gray Scale (Cool Gray for modern feel) -->
+    <color name="gray_50">#F8FAFC</color>
+    <color name="gray_100">#F1F5F9</color>
+    <color name="gray_200">#E2E8F0</color>
+    <color name="gray_300">#CBD5E1</color>
+    <color name="gray_400">#94A3B8</color>
+    <color name="gray_500">#64748B</color>
+    <color name="gray_600">#475569</color>
+    <color name="gray_700">#334155</color>
+    <color name="gray_800">#1E293B</color>
+    <color name="gray_900">#0F172A</color>
+    <color name="gray_950">#020617</color>
+
+    <!-- Status Colors -->
+    <color name="red_50">#FEF2F2</color>
+    <color name="red_100">#FEE2E2</color>
+    <color name="red_500">#EF4444</color>
+    <color name="red_600">#DC2626</color>
+    <color name="red_800">#991B1B</color>
+    <color name="red_900">#7F1D1D</color>
+
+    <color name="green_50">#F0FDF4</color>
+    <color name="green_100">#D1FAE5</color>
+    <color name="green_500">#10B981</color>
+    <color name="green_600">#059669</color>
+    <color name="green_800">#166534</color>
+    <color name="green_900">#14532D</color>
+
+    <color name="amber_50">#FFFBEB</color>
+    <color name="amber_100">#FEF3C7</color>
+    <color name="amber_500">#F59E0B</color>
+    <color name="amber_600">#D97706</color>
+    <color name="amber_800">#92400E</color>
+    <color name="amber_900">#78350F</color>
+
+    <!-- ============================================================
+         SEMANTIC TOKENS — Purpose-based aliases (use these in layouts)
+         ============================================================ -->
+
+    <!-- Brand Primary -->
+    <color name="colorPrimary">#2456CB</color>
+    <color name="colorPrimaryContainer">#E5EDFF</color>
     <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnPrimaryContainer">#173775</color>
 
-    <color name="colorSecondary">#7E57C2</color>
-    <color name="colorSecondaryVariant">#512DA8</color>
-    <color name="colorOnSecondary">#FFFFFF</color>
+    <!-- Secondary -->
+    <color name="colorSecondary">@color/gray_600</color>
+    <color name="colorSecondaryContainer">#DFE8F7</color>
+    <color name="colorOnSecondary">@color/gray_50</color>
+    <color name="colorOnSecondaryContainer">@color/gray_900</color>
 
-    <color name="colorBackground">#FAFAFA</color>
-    <color name="colorSurface">#FFFFFF</color>
-    <color name="colorTextPrimary">#212121</color>
-    <color name="colorTextSecondary">#757575</color>
+    <!-- Tertiary (accent) -->
+    <color name="colorTertiary">@color/blue_500</color>
+    <color name="colorTertiaryContainer">@color/blue_50</color>
+    <color name="colorOnTertiary">@color/gray_50</color>
+    <color name="colorOnTertiaryContainer">@color/blue_900</color>
 
-    <color name="colorError">#B00020</color>
+    <!-- Error -->
+    <color name="colorError">#B3261E</color>
+    <color name="colorErrorContainer">@color/red_100</color>
+    <color name="colorOnError">@color/gray_50</color>
+    <color name="colorOnErrorContainer">@color/red_900</color>
+
+    <!-- Surface & Background -->
+    <color name="colorBackground">#F3F5F9</color>
+    <color name="colorOnBackground">#20242D</color>
+
+    <color name="colorSurface">#FCFDFF</color>
+    <color name="colorOnSurface">#20242D</color>
+
+    <color name="colorSurfaceVariant">#E7EAF0</color>
+    <color name="colorOnSurfaceVariant">#535C6A</color>
+
+    <!-- Surface Container Layers (Material 3 Elevation) -->
+    <color name="colorSurfaceContainerLowest">#FFFFFF</color>
+    <color name="colorSurfaceContainerLow">#FFFFFF</color>
+    <color name="colorSurfaceContainer">#EEF2F7</color>
+    <color name="colorSurfaceContainerHigh">#E6EBF2</color>
+    <color name="colorSurfaceContainerHighest">#DEE5EE</color>
+
+    <!-- Outline -->
+    <color name="colorOutline">#747D89</color>
+    <color name="colorOutlineVariant">#D8DEE8</color>
+
+    <!-- Semantic Aliases for App Code -->
+    <color name="colorTextPrimary">#20242D</color>
+    <color name="colorTextSecondary">#535C6A</color>
+    <color name="colorTextTertiary">#616B78</color>
+    <color name="colorDivider">@color/gray_200</color>
+    <color name="colorScrim">#000000</color>
+
+    <!-- Status Semantic -->
+    <color name="colorSuccess">#166534</color>
+    <color name="colorSuccessContainer">@color/green_100</color>
+    <color name="colorOnSuccessContainer">@color/green_800</color>
+
+    <color name="colorWarning">#92400E</color>
+    <color name="colorWarningContainer">@color/amber_100</color>
+    <color name="colorOnWarningContainer">@color/amber_800</color>
+
+    <!-- Verification Status Aliases -->
+    <color name="status_none">@color/colorSecondary</color>
+    <color name="status_pending">@color/colorWarning</color>
+    <color name="status_success">@color/colorSuccess</color>
+    <color name="status_error">@color/colorError</color>
+    <color name="colorImageOverlay">#40000000</color>
+    <!-- E.2 interaction and identity roles; no screen-specific colors. -->
+    <color name="colorInputSurface">#E4E8F0</color>
+    <color name="colorInputFocused">#DAE5F9</color>
+    <color name="colorInputDisabled">#EBEDF1</color>
+    <color name="colorIdentitySurface">#E5EBF7</color>
 </resources>

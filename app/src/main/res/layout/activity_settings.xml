@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/colorBackground">
+    <com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" app:title="@string/settings_title" app:navigationIcon="@drawable/ic_back" app:navigationContentDescription="@string/action_back" />
+    <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/settingsLoading" android:layout_width="match_parent" android:layout_height="wrap_content" android:indeterminate="true" android:visibility="gone" android:contentDescription="@string/e_loading" />
+    <LinearLayout android:id="@+id/settingsError" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp" android:visibility="gone">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/d1_profile_load_error_body" android:textAppearance="@style/TextAppearance.Evently.Body" android:accessibilityLiveRegion="polite" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/settingsRetry" style="@style/Widget.Evently.PrimaryButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/action_retry" />
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView android:id="@+id/settingsContent" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingHorizontal="16dp" android:paddingBottom="24dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_event_intro" android:padding="14dp" android:layout_marginTop="10dp" android:layout_marginBottom="20dp" android:elevation="2dp">
+                <TextView android:id="@+id/tvSettingsName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+                <TextView android:id="@+id/tvSettingsEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textAppearance="@style/TextAppearance.Evently.Meta" />
+                <TextView android:id="@+id/tvSettingsProvider" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textAppearance="@style/TextAppearance.Evently.Label" />
+            </LinearLayout>
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_section_account" android:textAppearance="@style/TextAppearance.Evently.SettingsSection" />
+            <LinearLayout android:id="@+id/rowEditProfile" style="@style/Widget.Evently.SettingsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_group_surface" android:orientation="horizontal" android:paddingStart="14dp" android:paddingEnd="4dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/TextAppearance.Evently.SettingsTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/profile_edit" />
+                    <TextView style="@style/TextAppearance.Evently.SettingsSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_edit_profile_summary" />
+                </LinearLayout>
+                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:importantForAccessibility="no" android:padding="14dp" android:src="@drawable/ic_chevron_right" app:tint="?attr/colorOnSurfaceVariant" />
+            </LinearLayout>
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/settings_section_security" android:textAppearance="@style/TextAppearance.Evently.SettingsSection" />
+            <LinearLayout android:id="@+id/rowChangePassword" style="@style/Widget.Evently.SettingsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_group_surface" android:orientation="horizontal" android:paddingStart="14dp" android:paddingEnd="4dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/TextAppearance.Evently.SettingsTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_change_password" />
+                    <TextView style="@style/TextAppearance.Evently.SettingsSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_change_password_summary" />
+                </LinearLayout>
+                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:importantForAccessibility="no" android:padding="14dp" android:src="@drawable/ic_chevron_right" app:tint="?attr/colorOnSurfaceVariant" />
+            </LinearLayout>
+            <TextView android:id="@+id/tvSecurityInfo" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_group_surface" android:padding="12dp" android:textAppearance="@style/TextAppearance.Evently.SettingsSummary" />
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/settings_section_preferences" android:textAppearance="@style/TextAppearance.Evently.SettingsSection" />
+            <com.google.android.material.card.MaterialCardView style="@style/Widget.Evently.GroupSurface" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:paddingTop="0dp" android:paddingBottom="0dp">
+                    <LinearLayout android:id="@+id/rowLanguage" style="@style/Widget.Evently.SettingsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingEnd="0dp">
+                        <TextView style="@style/TextAppearance.Evently.SettingsTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/settings_language" android:layout_weight="1" />
+                        <TextView android:id="@+id/tvLanguageValue" style="@style/TextAppearance.Evently.SettingsSummary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="end" android:paddingStart="12dp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:importantForAccessibility="no" android:padding="14dp" android:src="@drawable/ic_chevron_right" app:tint="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorOutlineVariant" android:importantForAccessibility="no" />
+                    <LinearLayout android:id="@+id/rowTheme" style="@style/Widget.Evently.SettingsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingEnd="0dp">
+                        <TextView style="@style/TextAppearance.Evently.SettingsTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/settings_theme" android:layout_weight="1" />
+                        <TextView android:id="@+id/tvThemeValue" style="@style/TextAppearance.Evently.SettingsSummary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="end" android:paddingStart="12dp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:importantForAccessibility="no" android:padding="14dp" android:src="@drawable/ic_chevron_right" app:tint="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/settings_section_organizer" android:textAppearance="@style/TextAppearance.Evently.SettingsSection" />
+            <LinearLayout android:id="@+id/rowOrganizer" style="@style/Widget.Evently.SettingsRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="@drawable/bg_group_surface" android:orientation="horizontal" android:paddingStart="14dp" android:paddingEnd="4dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/TextAppearance.Evently.SettingsTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_organizer_account" />
+                    <TextView android:id="@+id/tvOrganizerValue" style="@style/TextAppearance.Evently.SettingsSummary" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView android:layout_width="48dp" android:layout_height="48dp" android:importantForAccessibility="no" android:padding="14dp" android:src="@drawable/ic_chevron_right" app:tint="?attr/colorOnSurfaceVariant" />
+            </LinearLayout>
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/settings_section_about" android:textAppearance="@style/TextAppearance.Evently.SettingsSection" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingVertical="8dp">
+                <TextView style="@style/TextAppearance.Evently.SettingsTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/settings_version" />
+                <TextView android:id="@+id/tvVersionValue" style="@style/TextAppearance.Evently.SettingsSummary" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/settings_section_session" android:textAppearance="@style/TextAppearance.Evently.SettingsSection" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnSettingsLogout" style="@style/Widget.Evently.ActionRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/auth_logout" android:textColor="?attr/colorError" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

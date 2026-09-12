@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="event_available_short">%1$d mjesta slobodno</string>
+    <string name="category_music">Muzika</string>
+    <string name="category_sport">Sport</string>
+    <string name="category_education">Edukacija</string>
+    <string name="category_culture">Kultura</string>
+    <string name="category_charity">Humanitarno</string>
+    <string name="category_volunteering">Volontiranje</string>
+    <string name="category_social">Druženje</string>
+    <string name="category_other">Ostalo</string>
+    <string name="event_category_choose">Odaberi kategoriju</string>
+    <string name="event_category_legacy">Odaberi kategoriju za ovaj postojeći događaj.</string>
+    <string name="event_publish_intro">Od ideje do susreta.</string>
+    <string name="event_publish_body">Predstavi događaj i pomozi ljudima da pronađu svoje mjesto.</string>
+    <string name="event_publish_action">Objavi događaj</string>
+    <string name="event_date_choose">Odaberi datum</string>
+    <string name="event_volunteer_hint">Uključi ako tražiš pomoć pri organizaciji.</string>
+    <string name="event_image_ready">Slika je spremna.</string>
+    <string name="event_image_replace">Zamijeni sliku</string>
+    <string name="event_image_retry">Pokušaj upload ponovo</string>
+    <string name="profile_account_hint">Tvoje postavke i račun</string>
+</resources>

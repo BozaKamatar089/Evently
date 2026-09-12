@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_load_error_title">Unable to load data</string>
+    <string name="d1_load_error_body">Check your connection and try again.</string>
+    <string name="d1_session_loading">Checking sign-in…</string>
+    <string name="d1_session_error">Your profile cannot be loaded right now.</string>
+</resources>

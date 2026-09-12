@@ -1,16 +1,33 @@
 package com.example.evently.domain.auth;
 
-import com.google.firebase.auth.FirebaseUser;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.example.evently.domain.common.Subscription;
+import com.google.android.gms.tasks.Task;
+
+/**
+ * Apstrakcija nad Firebase Authentication.
+ */
 public interface AuthRepository {
-    interface AuthCallback {
-        void onSuccess(FirebaseUser user);
-        void onError(Exception e);
-    }
 
-    void login(String email, String password, AuthCallback callback);
-    void register(String email, String password, AuthCallback callback);
-    void loginWithGoogle(String idToken, AuthCallback callback);
-    FirebaseUser getCurrentUser();
+    Task<AuthIdentity> login(@NonNull String email, @NonNull String password);
+
+    Task<AuthIdentity> register(@NonNull String email, @NonNull String password);
+
+    Task<AuthIdentity> loginWithGoogle(@NonNull String idToken);
+
+    Task<Void> sendPasswordResetEmail(@NonNull String email);
+
+    /** Reauthenticates a password account and changes its password atomically from the UI's perspective. */
+    Task<Void> changePassword(@NonNull String currentPassword, @NonNull String newPassword);
+
+    @Nullable AuthIdentity getCurrentUser();
+
+    /** Observes Auth without leaking FirebaseAuth/AuthStateListener to callers. */
+    @NonNull Subscription observeAuth(@NonNull AuthListener listener, @NonNull Runnable onCancelled);
+
+    interface AuthListener { void onAuthChanged(@Nullable AuthIdentity identity); }
+
     void logout();
 }

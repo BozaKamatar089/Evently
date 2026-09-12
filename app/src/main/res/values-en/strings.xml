@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Evently</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_my_events">My events</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Common -->
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">OK</string>
+    <string name="action_retry">Try again</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
+    <string name="action_save_changes">Save changes</string>
+    <string name="action_back">Back</string>
+    <string name="loading">Loading…</string>
+
+    <!-- Errors (stable codes) -->
+    <string name="error_auth_required">Sign in to continue</string>
+    <string name="error_network">Check your internet connection</string>
+    <string name="error_generic">Something went wrong. Please try again</string>
+
+    <!-- Auth -->
+    <string name="auth_login_title">Sign in</string>
+    <string name="auth_login_subtitle">Save events and join in.</string>
+    <string name="auth_register_title">Create account</string>
+    <string name="auth_register_subtitle">One account for your events and registrations.</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_confirm_password">Confirm password</string>
+    <string name="auth_first_name">First name</string>
+    <string name="auth_last_name">Last name</string>
+    <string name="auth_phone">Phone number</string>
+    <string name="auth_login">Sign in</string>
+    <string name="auth_register">Register</string>
+    <string name="auth_forgot_password">Forgot password?</string>
+    <string name="auth_login_with_google">Continue with Google</string>
+    <string name="auth_no_account">No account? </string>
+    <string name="auth_go_to_register">Register</string>
+    <string name="auth_have_account">Already have an account? </string>
+    <string name="auth_go_to_login">Sign in</string>
+    <string name="auth_error_empty_fields">Please fill in all required fields</string>
+    <string name="auth_error_invalid_email">Enter a valid email address</string>
+    <string name="auth_error_password_short">Password must be at least 6 characters</string>
+    <string name="auth_error_password_mismatch">Passwords do not match</string>
+    <string name="auth_error_generic">Something went wrong. Please try again</string>
+    <string name="auth_error_user_not_found">Account not found</string>
+    <string name="auth_error_wrong_password">Incorrect password</string>
+    <string name="auth_error_email_already_in_use">Email is already registered</string>
+    <string name="auth_error_weak_password">Password is too weak</string>
+    <string name="auth_error_network">Check your internet connection</string>
+    <string name="auth_error_too_many_requests">Too many attempts. Try again later</string>
+    <string name="auth_error_invalid_credential">Invalid login credentials</string>
+    <string name="auth_reset_title">Reset password</string>
+    <string name="auth_reset_subtitle">We will email you a link to change your password.</string>
+    <string name="auth_reset_send">Send link</string>
+    <string name="auth_reset_sent">Password reset link sent to your email</string>
+    <string name="auth_registration_success">Registration successful!</string>
+    <string name="auth_login_success">Welcome!</string>
+    <string name="auth_logout">Log out</string>
+
+    <!-- Mascots / States -->
+    <string name="state_empty_events_title">Events are on their way</string>
+    <string name="state_empty_events_body">Published events will appear here. Check back later.</string>
+    <string name="state_empty_events_cta">Create event</string>
+    <string name="state_empty_search_title">No results</string>
+    <string name="state_empty_search_body">Try a different word or category</string>
+    <string name="state_empty_favorites_title">Keep it for later</string>
+    <string name="state_empty_favorites_body">Tap the heart on an event to find it here later.</string>
+    <string name="state_empty_favorites_cta">Browse events</string>
+    <string name="favorites_guest_title">You are not signed in</string>
+    <string name="favorites_guest_body">Sign in to see your favorite events</string>
+    <string name="favorites_guest_cta">Sign in</string>
+    <string name="event_favorite">Favorite</string>
+    <string name="favorite_added">Added to favorites!</string>
+    <string name="favorite_removed">Removed from favorites</string>
+    <string name="favorite_error">Error updating favorites</string>
+
+    <!-- Admin -->
+    <string name="admin_dashboard_title">Admin panel</string>
+    <string name="admin_access_denied">No access to admin panel</string>
+    <string name="admin_stats_title">Statistics</string>
+    <string name="admin_stat_users">Users</string>
+    <string name="admin_stat_events">Events</string>
+    <string name="admin_stat_registrations">Registrations</string>
+    <string name="admin_stat_users_value">Users: %d</string>
+    <string name="admin_stat_events_value">Events: %d</string>
+    <string name="admin_stat_registrations_value">Registrations: %d</string>
+    <string name="admin_verifications_title">Verifications</string>
+    <string name="admin_verifications_pending">Pending</string>
+    <string name="admin_verifications_pending_count">Pending: %d</string>
+    <string name="admin_no_pending_verifications">No pending verifications</string>
+    <string name="admin_view_document">View document</string>
+    <string name="admin_approve_title">Approve verification</string>
+    <string name="admin_approve_body">Approve verification for %s?</string>
+    <string name="admin_reject_title">Reject verification</string>
+    <string name="admin_reject_body">Reject verification for %s?</string>
+    <string name="admin_reject_reason_hint">Rejection reason (required)</string>
+    <string name="admin_reject_reason_required">Enter rejection reason</string>
+    <string name="admin_approved">Verification approved</string>
+    <string name="admin_rejected">Verification rejected</string>
+    <string name="admin_error">Error</string>
+    <string name="admin_load_error">Error loading</string>
+    <string name="admin_action_failed">Action failed</string>
+    <string name="admin_events_title">All events</string>
+    <string name="admin_no_events">No events</string>
+    <string name="action_approve">Approve</string>
+    <string name="action_reject">Reject</string>
+    <string name="state_success_join_title">You are in!</string>
+    <string name="state_success_join_body">See you at the event</string>
+    <string name="state_error_title">Something went wrong</string>
+    <string name="state_error_body">Check your internet connection</string>
+    <string name="state_empty_notifications_title">No notifications</string>
+    <string name="state_empty_notifications_body">We will notify you when something happens</string>
+    <string name="state_empty_my_events_title">No events yet</string>
+    <string name="state_empty_my_events_body">Events you join will appear here.</string>
+    <string name="state_empty_my_events_cta">Browse events</string>
+    <string name="my_events_guest_title">You are not signed in</string>
+    <string name="my_events_guest_body">Sign in to see your events</string>
+    <string name="my_events_guest_cta">Sign in</string>
+    <string name="state_logout_title">See you again!</string>
+    <string name="state_logout_body">Are you sure you want to log out?</string>
+    <string name="state_logout_confirm">Log out</string>
+    <string name="state_logout_stay">Stay</string>
+
+    <!-- Home -->
+    <string name="home_hello">Explore events</string>
+    <string name="home_hello_name">Hi, %1$s</string>
+    <string name="home_guest_subtitle">Browse freely. Sign in when you want to take part.</string>
+    <string name="home_user_subtitle">Find an event for your next free day.</string>
+    <string name="settings_title">Settings</string>
+    <string name="home_search_hint">Search events…</string>
+    <string name="home_add_event">Add event</string>
+    <string name="home_loading_events">Loading events…</string>
+
+    <!-- Event card -->
+    <string name="event_spots">%1$d of %2$d places available</string>
+    <string name="event_capacity_full">Full</string>
+    <string name="event_participants">%1$d/%2$d participants</string>
+    <string name="event_volunteers">%1$d/%2$d volunteers</string>
+
+    <!-- Event details -->
+    <string name="event_details_title">Event details</string>
+    <string name="event_no_description">No description.</string>
+    <string name="event_join_as_participant">Join as participant</string>
+    <string name="event_join_as_volunteer">Join as volunteer</string>
+    <string name="event_edit">Edit event</string>
+    <string name="event_delete">Delete event</string>
+    <string name="event_delete_confirm_title">Delete event</string>
+    <string name="event_delete_confirm_body">Are you sure you want to delete this event?</string>
+    <string name="event_deleted">Event deleted.</string>
+    <string name="event_delete_error">Error deleting event</string>
+    <string name="event_load_error">Error loading event</string>
+    <string name="event_not_found">This event no longer exists.</string>
+    <string name="event_already_registered">You are already registered for this event</string>
+
+    <!-- Create / Edit event -->
+    <string name="event_create_title">Create event</string>
+    <string name="event_add_favorite">Add to favorites</string>
+    <string name="event_remove_favorite">Remove from favorites</string>
+    <string name="upload_progress_wait">Wait for the image upload to finish</string>
+    <string name="event_edit_title">Edit event</string>
+    <string name="event_field_title">Event title</string>
+    <string name="event_field_description">Description</string>
+    <string name="event_field_category">Category</string>
+    <string name="event_field_date">Date</string>
+    <string name="event_field_location">Location</string>
+    <string name="event_field_max_participants">Max participants</string>
+    <string name="event_field_max_volunteers">Max volunteers</string>
+    <string name="event_field_needs_volunteers">Volunteers needed</string>
+    <string name="event_pick_image">Pick image</string>
+    <string name="event_select_date">Select event date</string>
+    <string name="event_create_success">Event created successfully!</string>
+    <string name="event_edit_success">Event updated successfully!</string>
+    <string name="event_save_error">Error saving event</string>
+    <string name="upload_success">Image uploaded!</string>
+    <string name="upload_error">Error uploading image</string>
+    <string name="upload_progress">Upload: %1$d%%</string>
+    <string name="organizer_default_name">Organizer</string>
+    <string name="event_error_name_required">Enter the event title</string>
+    <string name="event_error_invalid_number">Enter a valid number</string>
+    <string name="event_error_fill_required">Please fill in required fields</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_new_user">New user</string>
+    <string name="profile_avatar">Profile picture</string>
+    <string name="profile_phone">Phone</string>
+    <string name="profile_bio">About me</string>
+    <string name="profile_verification_status">Verification status</string>
+    <string name="profile_edit">Edit profile</string>
+    <string name="profile_become_organizer">Become an organizer</string>
+    <string name="profile_not_set">Not set</string>
+    <string name="profile_guest_title">Your place in Evently</string>
+    <string name="profile_guest_body">Sign in for your profile, saved events and registrations.</string>
+    <string name="profile_updated">Profile updated!</string>
+    <string name="profile_tap_to_change_photo">Change profile photo</string>
+    <string name="profile_name">Full name</string>
+
+    <!-- Roles -->
+    <string name="role_participant">Participant</string>
+    <string name="role_organizer">Organizer</string>
+
+    <!-- Verification -->
+    <string name="verification_none">Not verified</string>
+    <string name="verification_pending">Verification pending</string>
+    <string name="verification_pending_body">Your request is awaiting review. Its status will update after a decision.</string>
+    <string name="verification_verified">Verified organizer</string>
+    <string name="verification_verified_body">Your identity is confirmed. You can now create events.</string>
+    <string name="verification_rejected">Verification rejected</string>
+    <string name="verification_rejected_body">Your request was rejected.</string>
+
+    <!-- Verification Request -->
+    <string name="verification_request_title">Verification Request</string>
+    <string name="verification_request_description">Submit your organization name and proof of identity or team. Once approved, you can publish events.</string>
+    <string name="verification_org_name">Organization / Team name</string>
+    <string name="verification_upload_proof">Identity proof</string>
+    <string name="verification_tap_upload">Choose a legible image of your document.</string>
+    <string name="verification_select_proof">Select image</string>
+    <string name="verification_proof_preview">Proof preview</string>
+    <string name="verification_submit">Submit request</string>
+    <string name="verification_cancel">Cancel request</string>
+    <string name="verification_request_again">Try again</string>
+    <string name="verification_success">Request submitted! Admins will review it.</string>
+    <string name="verification_cancelled">Request cancelled</string>
+    <string name="verification_error">Error submitting request</string>
+    <string name="verification_error_fill">Please fill all fields and add proof</string>
+    <string name="verification_change_proof">Change proof</string>
+    <string name="profile_save_error">Error saving profile</string>
+    <string name="profile_load_error">Error loading profile</string>
+
+    <!-- Fragment titles -->
+    <string name="my_events_organized_title">My events</string>
+    <string name="my_events_registered_title">My registrations</string>
+
+    <!-- Registrations -->
+    <string name="registration_success">You have successfully registered!</string>
+    <string name="registration_cancelled">Registration cancelled</string>
+    <string name="registration_error_generic">Registration error. Please try again.</string>
+    <string name="registration_error_full">No more spots available</string>
+    <string name="registration_error_closed">Registrations are closed</string>
+    <string name="registration_error_already">You are already registered</string>
+    <string name="registration_cancel_confirm_title">Cancel registration</string>
+    <string name="registration_cancel_confirm_body">Do you want to cancel your registration for this event?</string>
+    <string name="registration_unregister">Unregister</string>
+    <string name="registration_type_participant">Participant</string>
+    <string name="registration_type_volunteer">Volunteer</string>
+
+    <!-- Organizer: Registrations review -->
+    <string name="organizer_registrations_title">Registrations</string>
+    <string name="organizer_registrations_empty">No registrations for this event</string>
+    <string name="organizer_remove_registration">Remove registration</string>
+    <string name="organizer_remove_confirm_title">Remove registration</string>
+    <string name="organizer_remove_confirm_body">Remove %1$s from the registrations list?</string>
+    <string name="registration_removed">Registration removed</string>
+
+    <!-- Admin labels -->
+    <string name="admin_uid_label">UID: %1$s</string>
+    <string name="admin_organizer_label">Org: %1$s</string>
+    <string name="home_section_upcoming">Available events</string>
+    <string name="favorites_section_saved">Everything you want to keep for later.</string>
+    <string name="my_events_section_yours">Your registrations and events you organize.</string>
+    <string name="profile_section_about">About you</string>
+    <string name="profile_section_account">Your account</string>
+    <string name="settings_section_account">Account</string>
+    <string name="settings_section_session">Session</string>
+    <string name="event_form_section_basics">The essentials</string>
+    <string name="event_form_section_schedule">When and where</string>
+    <string name="event_form_section_capacity">Places and volunteers</string>
+    <string name="admin_pending_section">Requests to review</string>
+    <string name="e_about_event">About the event</string>
+    <string name="e_organizer">Organizer</string>
+    <string name="e_availability">Taking part</string>
+    <string name="e_participants">Participants</string>
+    <string name="e_volunteers">Volunteers</string>
+    <string name="e_manage_event">Manage event</string>
+    <string name="e_event_image">Event image</string>
+    <string name="e_image_optional">Optional. Choose an image that represents your event.</string>
+    <string name="e_review_verification">Review request</string>
+    <string name="e_resubmit_verification">Review and resubmit</string>
+    <string name="e_admin_overview">Platform overview</string>
+    <string name="e_registration_open">Registration is open</string>
+    <string name="e_registration_closed">Registration is closed</string>
+    <string name="e_auth_back">Back to events</string>
+    <string name="e_loading">Loading</string>
+    <string name="e_event_open_description">Open event: %1$s</string>
+</resources>

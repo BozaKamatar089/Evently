@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_profile_load_error_title">Profil nije moguće učitati</string>
+    <string name="d1_profile_load_error_body">Provjerite vezu i pokušajte ponovo.</string>
+    <string name="d1_profile_missing_title">Profil nije pronađen</string>
+    <string name="d1_profile_missing_body">Pokušajte ponovo učitati podatke računa.</string>
+    <string name="d1_profile_wait_for_upload">Sačekajte da se slika završi učitavati.</string>
+    <string name="d1_verification_wait_for_upload">Sačekajte da se dokument završi učitavati.</string>
+    <string name="d1_verification_load_error_title">Zahtjev nije moguće učitati</string>
+    <string name="d1_verification_load_error_body">Provjerite vezu i pokušajte ponovo.</string>
+    <string name="d1_admin_load_error_title">Administratorski podaci nisu dostupni</string>
+    <string name="d1_admin_load_error_body">Učitavanje nije uspjelo. Pokušajte ponovo.</string>
+    <string name="d1_admin_empty_title">Nema podataka</string>
+    <string name="d1_admin_empty_body">Trenutno nema zahtjeva ni događaja za prikaz.</string>
+</resources>

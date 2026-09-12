@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark semantic roles are paired explicitly; primitive hue scales remain stable. -->
+    <color name="colorPrimary">#ADC7FF</color>
+    <color name="colorOnPrimary">#102B66</color>
+    <color name="colorPrimaryContainer">#233E70</color>
+    <color name="colorOnPrimaryContainer">#DEE8FF</color>
+    <color name="colorSecondary">#BEC7D3</color>
+    <color name="colorOnSecondary">#1A2633</color>
+    <color name="colorSecondaryContainer">#303945</color>
+    <color name="colorOnSecondaryContainer">#E3E8EF</color>
+    <color name="colorTertiary">#ADC7FF</color>
+    <color name="colorOnTertiary">#102B66</color>
+    <color name="colorTertiaryContainer">#233E70</color>
+    <color name="colorOnTertiaryContainer">#DEE8FF</color>
+    <color name="colorError">#FFB4AB</color>
+    <color name="colorOnError">#690005</color>
+    <color name="colorErrorContainer">#522421</color>
+    <color name="colorOnErrorContainer">#FFDAD6</color>
+    <color name="colorBackground">#12151B</color>
+    <color name="colorOnBackground">#EDF0F5</color>
+    <color name="colorSurface">#12151B</color>
+    <color name="colorOnSurface">#EDF0F5</color>
+    <color name="colorSurfaceVariant">#303640</color>
+    <color name="colorOnSurfaceVariant">#BAC2CE</color>
+    <color name="colorSurfaceContainerLowest">#0E1116</color>
+    <color name="colorSurfaceContainerLow">#1C212A</color>
+    <color name="colorSurfaceContainer">#232A34</color>
+    <color name="colorSurfaceContainerHigh">#2B333E</color>
+    <color name="colorSurfaceContainerHighest">#343D49</color>
+    <color name="colorOutline">#8993A2</color>
+    <color name="colorOutlineVariant">#414A58</color>
+    <color name="colorTextPrimary">#EDF0F5</color>
+    <color name="colorTextSecondary">#BAC2CE</color>
+    <color name="colorTextTertiary">#AAB4C3</color>
+    <color name="colorDivider">#414A58</color>
+    <color name="colorSuccess">#8FDCAD</color>
+    <color name="colorSuccessContainer">#173E2B</color>
+    <color name="colorOnSuccessContainer">#BCF1CF</color>
+    <color name="colorWarning">#F5CE87</color>
+    <color name="colorWarningContainer">#493719</color>
+    <color name="colorOnWarningContainer">#FFE1A8</color>
+    <!-- E.2 interaction and identity roles; no screen-specific colors. -->
+    <color name="colorInputSurface">#29323F</color>
+    <color name="colorInputFocused">#303F56</color>
+    <color name="colorInputDisabled">#1C222C</color>
+    <color name="colorIdentitySurface">#1B2940</color>
+</resources>

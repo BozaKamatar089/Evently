@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_profile_load_error_title">Unable to load profile</string>
+    <string name="d1_profile_load_error_body">Check your connection and try again.</string>
+    <string name="d1_profile_missing_title">Profile not found</string>
+    <string name="d1_profile_missing_body">Try loading the account data again.</string>
+    <string name="d1_profile_wait_for_upload">Wait for the image upload to finish.</string>
+    <string name="d1_verification_wait_for_upload">Wait for the document upload to finish.</string>
+    <string name="d1_verification_load_error_title">Unable to load request</string>
+    <string name="d1_verification_load_error_body">Check your connection and try again.</string>
+    <string name="d1_admin_load_error_title">Admin data is unavailable</string>
+    <string name="d1_admin_load_error_body">Loading failed. Try again.</string>
+    <string name="d1_admin_empty_title">No data</string>
+    <string name="d1_admin_empty_body">There are currently no requests or events to display.</string>
+</resources>

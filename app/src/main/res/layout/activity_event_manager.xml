@@ -1,168 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="24dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kreiraj Događaj"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- SLIKA -->
-        <ImageView
-            android:id="@+id/ivEventImage"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            android:background="#E0E0E0"
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_marginBottom="8dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSelectImage"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Odaberi sliku (Opciono)"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Naziv događaja -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Naziv događaja *"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Odabir Datuma (Klikom se otvara kalendar, unos onemogućen) -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:inputType="none"
-                android:hint="Odaberi datum (Kalendar) *"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Grad i Lokacija -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEventCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Grad *"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEventLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Lokacija *"/>
-            </com.google.android.material.textfield.TextInputLayout>
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/colorBackground">
+    <com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" app:title="@string/event_create_title" app:navigationIcon="@drawable/ic_back" app:navigationContentDescription="@string/action_back" />
+    <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <androidx.core.widget.NestedScrollView android:id="@+id/contentManager" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_event_intro" android:padding="16dp" android:layout_marginBottom="18dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_publish_intro" android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_publish_body" android:textAppearance="@style/TextAppearance.Evently.SettingsSummary" android:layout_marginTop="4dp" />
+                </LinearLayout>
+                <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_form_section_basics" android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/titleLayout" style="@style/Widget.Evently.PublishingInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_field_title">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEventTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/categoryLayout" style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_category_choose" app:boxBackgroundColor="?attr/colorSurfaceContainerLow">
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView android:id="@+id/etEventCategory" android:layout_width="match_parent" android:layout_height="wrap_content" android:dropDownHeight="288dp" android:dropDownVerticalOffset="4dp" android:inputType="none" android:minHeight="52dp" android:popupBackground="@drawable/bg_dropdown_surface" android:popupElevation="4dp" android:saveEnabled="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/descriptionLayout" style="@style/Widget.Evently.PublishingInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_field_description">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEventDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textMultiLine|textCapSentences" android:minLines="2" android:gravity="top" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_form_section_schedule" android:textAppearance="@style/TextAppearance.Evently.EventTitle" android:layout_marginTop="20dp" />
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/dateLayout" style="@style/Widget.Evently.PublishingInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_field_date" app:endIconMode="custom" app:endIconDrawable="@drawable/ic_calendar" app:endIconContentDescription="@string/event_date_choose" app:boxBackgroundColor="@color/colorIdentitySurface">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEventDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="none" android:focusable="true" android:cursorVisible="false" android:clickable="true" android:minHeight="52dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/locationLayout" style="@style/Widget.Evently.PublishingInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_field_location">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEventLocation" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_form_section_capacity" android:textAppearance="@style/TextAppearance.Evently.EventTitle" android:layout_marginTop="20dp" />
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/maxParticipantsLayout" style="@style/Widget.Evently.PublishingInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_field_max_participants">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etMaxParticipants" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" android:maxLength="9" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switchVolunteers" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:layout_marginTop="8dp" android:text="@string/event_field_needs_volunteers" android:background="@drawable/bg_group_surface" android:paddingHorizontal="14dp" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_volunteer_hint" android:textAppearance="@style/TextAppearance.Evently.SettingsSummary" android:layout_marginTop="4dp" />
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/maxVolunteersLayout" style="@style/Widget.Evently.PublishingInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:hint="@string/event_field_max_volunteers" android:visibility="gone">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etMaxVolunteers" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" android:maxLength="9" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/e_event_image" android:textAppearance="@style/TextAppearance.Evently.EventTitle" android:layout_marginTop="20dp" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/e_image_optional" android:textAppearance="@style/TextAppearance.Evently.SettingsSummary" android:layout_marginTop="4dp" />
+                <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivEventImage" android:layout_width="match_parent" android:layout_height="136dp" android:layout_marginTop="8dp" android:scaleType="centerCrop" android:background="?attr/colorSurfaceContainerHigh" app:shapeAppearanceOverlay="@style/ShapeAppearance.Evently.Image" android:contentDescription="@string/event_pick_image" android:src="@drawable/event_placeholder" android:elevation="2dp" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSelectImage" style="@style/Widget.Evently.SecondaryButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_pick_image" android:layout_marginTop="6dp" />
+                <TextView android:id="@+id/tvUploadStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:accessibilityLiveRegion="polite" />
+                <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/progressBarCreate" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:indeterminate="true" android:visibility="gone" android:contentDescription="@string/e_loading" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSaveEvent" style="@style/Widget.Evently.PrimaryButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/event_publish_action" android:layout_marginTop="20dp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <LinearLayout android:id="@+id/formError" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_gravity="bottom" android:background="?attr/colorErrorContainer" android:padding="16dp" android:visibility="gone">
+            <TextView android:id="@+id/formErrorMessage" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/d1_event_form_error" android:textColor="?attr/colorOnErrorContainer" android:textAppearance="@style/TextAppearance.Evently.Body" android:accessibilityLiveRegion="polite" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnDismissFormError" style="@style/Widget.Evently.TextButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/d1_dismiss" android:textColor="?attr/colorOnErrorContainer" />
         </LinearLayout>
-
-        <!-- Očekivani Učesnici -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etMaxParticipants"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Broj očekivanih učesnika *"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Volonteri Switch -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchVolunteers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Da li su potrebni volonteri?"
-            android:layout_marginBottom="8dp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutMaxVolunteers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etMaxVolunteers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Koliko volontera? *"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Opis -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventDescription"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:gravity="top"
-                android:hint="Opis događaja (Opciono)"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBarCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSaveEvent"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Sačuvaj događaj"
-            android:backgroundTint="#1E88E5"/>
-
-    </LinearLayout>
-</ScrollView>
+    </FrameLayout>
+</LinearLayout>

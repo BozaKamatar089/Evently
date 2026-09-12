@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/colorBackground">
+    <com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" app:navigationIcon="@drawable/ic_back" app:navigationContentDescription="@string/action_back" android:background="@color/colorIdentitySurface" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true" android:clipToPadding="false">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="?attr/colorSurface">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingHorizontal="24dp" android:paddingTop="24dp" android:paddingBottom="24dp" android:background="@drawable/bg_event_intro">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/app_name" android:textAppearance="@style/TextAppearance.Evently.Brand" />
+                <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/auth_login_title" android:textAppearance="@style/TextAppearance.Evently.ScreenTitle" android:layout_marginTop="20dp" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/auth_login_subtitle" android:textAppearance="@style/TextAppearance.Evently.Meta" android:layout_marginTop="6dp" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingHorizontal="24dp" android:paddingTop="24dp" android:paddingBottom="28dp" android:background="?attr/colorSurface" android:elevation="2dp">
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/emailLayout" style="@style/Widget.Evently.Input" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/auth_email">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textEmailAddress" android:autofillHints="emailAddress" android:imeOptions="actionNext" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout android:id="@+id/passwordLayout" style="@style/Widget.Evently.Input" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="@string/auth_password" app:endIconMode="password_toggle">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etPassword" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPassword" android:autofillHints="password" android:imeOptions="actionDone" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnForgotPassword" style="@style/Widget.Evently.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end" android:text="@string/auth_forgot_password" />
+                <TextView android:id="@+id/tvLoginError" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:textColor="?attr/colorError" android:visibility="gone" android:accessibilityLiveRegion="polite" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnLogin" style="@style/Widget.Evently.PrimaryButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/auth_login" android:layout_marginTop="12dp" />
+                <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/progressBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:indeterminate="true" android:visibility="gone" android:contentDescription="@string/e_loading" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnGoogleSignIn" style="@style/Widget.Evently.SecondaryButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/auth_login_with_google" android:layout_marginTop="12dp" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:layout_marginTop="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_no_account" android:textAppearance="@style/TextAppearance.Evently.Meta" />
+                    <com.google.android.material.button.MaterialButton android:id="@+id/tvGoToRegister" style="@style/Widget.Evently.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_go_to_register" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_load_error_title">Nije moguće učitati podatke</string>
+    <string name="d1_load_error_body">Provjerite vezu i pokušajte ponovo.</string>
+    <string name="d1_session_loading">Provjera prijave…</string>
+    <string name="d1_session_error">Profil trenutno nije moguće učitati.</string>
+</resources>

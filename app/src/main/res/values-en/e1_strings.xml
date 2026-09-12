@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_edit_profile_summary">Name, photo, bio and phone</string>
+    <string name="settings_section_security">Privacy &amp; security</string>
+    <string name="settings_section_preferences">App preferences</string>
+    <string name="settings_section_organizer">Organizer</string>
+    <string name="settings_section_about">About</string>
+    <string name="settings_change_password">Change password</string>
+    <string name="settings_change_password_summary">Confirm your current password and set a new one</string>
+    <string name="settings_provider_password">Signed in with email and password</string>
+    <string name="settings_provider_google">Signed in with a Google account</string>
+    <string name="settings_provider_multiple">Email and Google account connected</string>
+    <string name="settings_provider_unknown">Sign-in method unavailable</string>
+    <string name="settings_google_security_info">Your Google account manages its password and email address.</string>
+    <string name="settings_account_security_info">Sensitive changes require you to confirm your identity again.</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_bosnian">Bosanski</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_dialog">App language</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_theme_dialog">App appearance</string>
+    <string name="settings_organizer_account">Organizer account</string>
+    <string name="settings_organizer_none">Submit a verification request</string>
+    <string name="settings_organizer_pending">Request under review</string>
+    <string name="settings_organizer_rejected">Request needs attention</string>
+    <string name="settings_organizer_approved">Verified organizer</string>
+    <string name="settings_version">App version</string>
+    <string name="settings_logout_title">Log out</string>
+    <string name="settings_logout_body">Log out on this device?</string>
+
+    <string name="password_change_title">Protect your account</string>
+    <string name="password_change_body">Confirm your current password before setting a new one.</string>
+    <string name="password_current">Current password</string>
+    <string name="password_new">New password</string>
+    <string name="password_change_action">Change password</string>
+    <string name="password_changed">Password changed.</string>
+    <string name="password_current_required">Enter your current password</string>
+    <string name="password_unchanged">Choose a different new password</string>
+    <string name="password_provider_required">Password changes are available to accounts that sign in with a password.</string>
+
+    <string name="verification_why_title">Why organizers are verified</string>
+    <string name="verification_why_body">Identity checks help participants recognize trusted organizers. Your document is used only to review this request.</string>
+    <string name="verification_document_selected">Document selected</string>
+    <string name="verification_uploading">Uploading document: %1$d%%</string>
+    <string name="verification_uploaded">Document ready to submit</string>
+    <string name="verification_upload_config_missing">Document uploads are not configured in this build. Contact the app owner.</string>
+    <string name="verification_upload_failed">The document was not uploaded. Check your connection and try again.</string>
+    <string name="verification_review_note">After submission, the request remains under review until an administrator makes a decision.</string>
+
+    <string name="admin_queue_body">Review the proof and decide each request.</string>
+    <string name="admin_queue_empty_title">No pending requests</string>
+    <string name="admin_queue_empty_body">New requests will appear here.</string>
+    <string name="admin_section_unavailable">This section is temporarily unavailable.</string>
+    <string name="admin_all_failed_body">Check your connection and access, then try again.</string>
+    <string name="admin_event_status_active">Active</string>
+    <string name="admin_event_status_cancelled">Cancelled</string>
+    <string name="admin_event_status_deleted">Deleted</string>
+    <string name="admin_participant_capacity">Participants: %1$d/%2$d</string>
+    <string name="auth_identity_line">Events you want to experience, all in one place.</string>
+    <string name="auth_personal_details">Basic information</string>
+    <string name="auth_account_details">Sign-in details</string>
+</resources>

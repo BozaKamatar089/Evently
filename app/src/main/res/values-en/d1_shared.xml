@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_delete_requires_empty">All attendees must cancel before deletion</string>
+    <string name="d1_sign_in_participant">Sign in to participate</string>
+    <string name="d1_sign_in_volunteer">Sign in to volunteer</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardElevation="1dp" app:strokeWidth="0dp" app:strokeColor="?attr/colorOutlineVariant" app:cardCornerRadius="12dp" app:cardBackgroundColor="?attr/colorSurfaceContainerLow">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+        <TextView android:id="@+id/tvOrgName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+        <TextView android:id="@+id/tvUserId" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:visibility="gone" />
+        <TextView android:id="@+id/tvDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:layout_marginTop="4dp" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/tvViewDocument" style="@style/Widget.Evently.SecondaryButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/admin_view_document" android:visibility="gone" android:layout_marginTop="12dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="10dp">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnReject" style="@style/Widget.Evently.SecondaryButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/action_reject" android:textColor="?attr/colorError" android:layout_marginEnd="5dp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnApprove" style="@style/Widget.Evently.PrimaryButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/action_approve" android:layout_marginStart="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

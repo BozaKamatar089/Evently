@@ -1,151 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
-
-        <!-- Slika profila -->
-        <FrameLayout
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="16dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivProfileImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_profile"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#BDBDBD"/>
-
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@android:drawable/ic_menu_camera"
-                android:layout_gravity="bottom|end"
-                android:background="@drawable/ic_home"
-                android:backgroundTint="?attr/colorSurface"
-                app:tint="#1E88E5"/>
-        </FrameLayout>
-
-        <!-- Ime i Prezime -->
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Korisnik"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface" />
-
-        <!-- Email -->
-        <TextView
-            android:id="@+id/tvUserEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="ucitavanje@email.com"
-            android:textSize="14sp"
-            android:textColor="#757575" />
-
-        <!-- Broj telefona -->
-        <TextView
-            android:id="@+id/tvUserPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Telefon: Nije povezan"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#1E88E5" />
-
-        <!-- Datum rođenja -->
-        <TextView
-            android:id="@+id/tvDob"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Datum rođenja: Nije postavljeno"
-            android:textSize="16sp"
-            android:textColor="#757575" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E0E0E0"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"/>
-
-
-        <!-- Dugmad za akcije -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnChangePassword"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Promjena lozinke"
-            android:textColor="?attr/colorOnSurface"
-            app:strokeColor="#BDBDBD"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnChangeEmail"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:text="Promjena e-maila"
-            android:textColor="?attr/colorOnSurface"
-            app:strokeColor="#BDBDBD"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnVerifyPhone"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:text="Potvrdi broj telefona"
-            android:textColor="?attr/colorOnSurface"
-            app:strokeColor="#BDBDBD"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSetDob"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:text="Postavi datum rođenja"
-            android:textColor="?attr/colorOnSurface"
-            app:strokeColor="#BDBDBD"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnToggleRole"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
-            android:text="Postani Organizator"
-            android:backgroundTint="#4CAF50" />
-
-        <!-- Dugme za odjavu -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogout"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="24dp"
-            android:text="Odjavi se"
-            android:textColor="#D32F2F"
-            app:strokeColor="#D32F2F" />
-
-    </LinearLayout>
-</ScrollView>
+<?xml version='1.0' encoding='utf-8'?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/colorBackground">
+    <androidx.core.widget.NestedScrollView android:id="@+id/scrollProfile" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:id="@+id/tvProfileTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/nav_profile" android:textAppearance="@style/TextAppearance.Evently.ScreenTitle" />
+            <com.google.android.material.card.MaterialCardView style="@style/Widget.Evently.GroupSurface" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/colorIdentitySurface">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="14dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/ivProfileAvatar" android:layout_width="72dp" android:layout_height="72dp" android:scaleType="centerCrop" android:src="@drawable/profile_placeholder" android:contentDescription="@string/profile_avatar" app:shapeAppearanceOverlay="@style/ShapeAppearance.Evently.Avatar" />
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:orientation="vertical">
+                            <TextView android:id="@+id/tvProfileName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+                            <TextView android:id="@+id/tvProfileEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:layout_marginTop="4dp" />
+                            <com.google.android.material.chip.Chip android:id="@+id/chipProfileRole" style="@style/Widget.Evently.Category" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <com.google.android.material.button.MaterialButton android:id="@+id/btnEditProfile" style="@style/Widget.Evently.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/profile_edit" android:layout_gravity="end" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <LinearLayout android:id="@+id/cardInfo" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:orientation="vertical">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/profile_section_about" android:textAppearance="@style/TextAppearance.Evently.Label" />
+                <TextView android:id="@+id/tvProfileBio" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Body" android:layout_marginTop="8dp" />
+                <TextView android:id="@+id/tvProfilePhoneLabel" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/profile_phone" android:textAppearance="@style/TextAppearance.Evently.Label" android:layout_marginTop="16dp" />
+                <TextView android:id="@+id/tvProfilePhone" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:layout_marginTop="4dp" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/cardVerificationDetail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:orientation="vertical" android:visibility="gone" android:paddingStart="12dp" android:paddingEnd="0dp" android:background="@drawable/bg_verification_accent">
+                <TextView android:id="@+id/tvVerificationDetailTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+                <TextView android:id="@+id/tvVerificationDetailBody" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/TextAppearance.Evently.Meta" android:layout_marginTop="8dp" />
+            </LinearLayout>
+            <com.google.android.material.chip.Chip android:id="@+id/chipProfileVerification" style="@style/Widget.Evently.Category" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnVerifyOrganizer" style="@style/Widget.Evently.TonalButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/profile_become_organizer" android:layout_marginTop="12dp" android:visibility="gone" />
+            <com.example.evently.ui.views.AccessibleHeadingTextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/profile_section_account" android:textAppearance="@style/TextAppearance.Evently.Label" android:layout_marginTop="20dp" />
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" app:cardBackgroundColor="?attr/colorSurfaceContainerLow" app:cardCornerRadius="16dp" app:cardElevation="1dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingHorizontal="12dp" android:paddingVertical="4dp">
+                    <com.google.android.material.button.MaterialButton android:id="@+id/btnSettings" style="@style/Widget.Evently.ActionRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_title" app:icon="@drawable/ic_chevron_right" app:iconGravity="end" app:iconTint="?attr/colorOnSurfaceVariant" android:minHeight="52dp" />
+                    <com.google.android.material.button.MaterialButton android:id="@+id/btnAdminDashboard" style="@style/Widget.Evently.ActionRow" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/admin_dashboard_title" android:visibility="gone" app:icon="@drawable/ic_chevron_right" app:iconGravity="end" app:iconTint="?attr/colorOnSurfaceVariant" android:minHeight="52dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/progressBarProfile" android:layout_width="match_parent" android:layout_height="wrap_content" android:indeterminate="true" android:visibility="gone" android:contentDescription="@string/e_loading" />
+    <com.example.evently.ui.views.EmptyStateView android:id="@+id/emptyStateProfile" android:layout_width="match_parent" android:layout_height="match_parent" />
+</FrameLayout>

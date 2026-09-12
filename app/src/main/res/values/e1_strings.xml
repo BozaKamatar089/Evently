@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_edit_profile_summary">Ime, fotografija, biografija i telefon</string>
+    <string name="settings_section_security">Privatnost i sigurnost</string>
+    <string name="settings_section_preferences">Postavke aplikacije</string>
+    <string name="settings_section_organizer">Organizator</string>
+    <string name="settings_section_about">O aplikaciji</string>
+    <string name="settings_change_password">Promijeni lozinku</string>
+    <string name="settings_change_password_summary">Potvrdi trenutnu lozinku i postavi novu</string>
+    <string name="settings_provider_password">Prijava emailom i lozinkom</string>
+    <string name="settings_provider_google">Prijava Google računom</string>
+    <string name="settings_provider_multiple">Povezani email i Google račun</string>
+    <string name="settings_provider_unknown">Način prijave nije dostupan</string>
+    <string name="settings_google_security_info">Lozinkom i email adresom upravlja tvoj Google račun.</string>
+    <string name="settings_account_security_info">Osjetljive promjene zahtijevaju ponovnu potvrdu identiteta.</string>
+    <string name="settings_language">Jezik</string>
+    <string name="settings_language_bosnian">Bosanski</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_dialog">Jezik aplikacije</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_theme_system">Sistem</string>
+    <string name="settings_theme_light">Svijetla</string>
+    <string name="settings_theme_dark">Tamna</string>
+    <string name="settings_theme_dialog">Izgled aplikacije</string>
+    <string name="settings_organizer_account">Organizatorski račun</string>
+    <string name="settings_organizer_none">Pošalji zahtjev za verifikaciju</string>
+    <string name="settings_organizer_pending">Zahtjev je na pregledu</string>
+    <string name="settings_organizer_rejected">Zahtjev treba dopuniti</string>
+    <string name="settings_organizer_approved">Verificirani organizator</string>
+    <string name="settings_version">Verzija aplikacije</string>
+    <string name="settings_logout_title">Odjava</string>
+    <string name="settings_logout_body">Odjaviti se sa ovog uređaja?</string>
+
+    <string name="password_change_title">Zaštiti svoj račun</string>
+    <string name="password_change_body">Za promjenu lozinke prvo potvrdi trenutnu lozinku.</string>
+    <string name="password_current">Trenutna lozinka</string>
+    <string name="password_new">Nova lozinka</string>
+    <string name="password_change_action">Promijeni lozinku</string>
+    <string name="password_changed">Lozinka je promijenjena.</string>
+    <string name="password_current_required">Unesi trenutnu lozinku</string>
+    <string name="password_unchanged">Nova lozinka mora biti drugačija</string>
+    <string name="password_provider_required">Promjena lozinke dostupna je računima koji se prijavljuju lozinkom.</string>
+
+    <string name="verification_why_title">Zašto provjeravamo organizatore</string>
+    <string name="verification_why_body">Provjera identiteta pomaže učesnicima da prepoznaju pouzdane organizatore. Dokument koristi se samo za pregled zahtjeva.</string>
+    <string name="verification_document_selected">Dokument je odabran</string>
+    <string name="verification_uploading">Prijenos dokumenta: %1$d%%</string>
+    <string name="verification_uploaded">Dokument je spreman za slanje</string>
+    <string name="verification_upload_config_missing">Prijenos dokumenata nije konfigurisan u ovoj verziji aplikacije. Obrati se vlasniku aplikacije.</string>
+    <string name="verification_upload_failed">Dokument nije prenesen. Provjeri vezu i pokušaj ponovo.</string>
+    <string name="verification_review_note">Nakon slanja zahtjev ostaje na pregledu dok administrator ne donese odluku.</string>
+
+    <string name="admin_queue_body">Pregledaj dokaz i donesi odluku za svaki zahtjev.</string>
+    <string name="admin_queue_empty_title">Nema zahtjeva na čekanju</string>
+    <string name="admin_queue_empty_body">Novi zahtjevi pojavit će se ovdje.</string>
+    <string name="admin_section_unavailable">Ovaj dio trenutno nije moguće učitati.</string>
+    <string name="admin_all_failed_body">Provjeri vezu i dozvole, zatim pokušaj ponovo.</string>
+    <string name="admin_event_status_active">Aktivan</string>
+    <string name="admin_event_status_cancelled">Otkazan</string>
+    <string name="admin_event_status_deleted">Obrisan</string>
+    <string name="admin_participant_capacity">Učesnici: %1$d/%2$d</string>
+    <string name="auth_identity_line">Događaji koje želiš doživjeti, na jednom mjestu.</string>
+    <string name="auth_personal_details">Osnovni podaci</string>
+    <string name="auth_account_details">Podaci za prijavu</string>
+</resources>

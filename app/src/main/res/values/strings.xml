@@ -1,3 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Aplikacija -->
     <string name="app_name">Evently</string>
+
+    <!-- Donja navigacija -->
+    <string name="nav_home">Početna</string>
+    <string name="nav_favorites">Omiljeni</string>
+    <string name="nav_my_events">Moji događaji</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Zajedničko -->
+    <string name="action_cancel">Odustani</string>
+    <string name="action_ok">U redu</string>
+    <string name="action_retry">Pokušaj ponovo</string>
+    <string name="action_delete">Izbriši</string>
+    <string name="action_save">Spremi</string>
+    <string name="action_save_changes">Spremi promjene</string>
+    <string name="action_back">Nazad</string>
+    <string name="loading">Učitavanje…</string>
+
+    <!-- Greške (stabilni kodovi) -->
+    <string name="error_auth_required">Prijavite se za nastavak</string>
+    <string name="error_network">Provjerite internetsku vezu</string>
+    <string name="error_generic">Došlo je do greške. Pokušajte ponovo</string>
+
+    <!-- Auth -->
+    <string name="auth_login_title">Prijavi se</string>
+    <string name="auth_login_subtitle">Sačuvaj događaje i prijavi se za učešće.</string>
+    <string name="auth_register_title">Kreirajte nalog</string>
+    <string name="auth_register_subtitle">Jedan nalog za tvoje događaje i prijave.</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Lozinka</string>
+    <string name="auth_confirm_password">Potvrdi lozinku</string>
+    <string name="auth_first_name">Ime</string>
+    <string name="auth_last_name">Prezime</string>
+    <string name="auth_phone">Broj telefona</string>
+    <string name="auth_login">Prijavi se</string>
+    <string name="auth_register">Registruj se</string>
+    <string name="auth_forgot_password">Zaboravili ste lozinku?</string>
+    <string name="auth_login_with_google">Nastavi sa Googleom</string>
+    <string name="auth_no_account">Nemate nalog? </string>
+    <string name="auth_go_to_register">Registrujte se</string>
+    <string name="auth_have_account">Već imate nalog? </string>
+    <string name="auth_go_to_login">Prijavite se</string>
+    <string name="auth_error_empty_fields">Molimo popunite sva obavezna polja</string>
+    <string name="auth_error_invalid_email">Unesite ispravnu email adresu</string>
+    <string name="auth_error_password_short">Lozinka mora imati najmanje 6 karaktera</string>
+    <string name="auth_error_password_mismatch">Lozinke se ne poklapaju</string>
+    <string name="auth_error_generic">Došlo je do greške. Pokušajte ponovo</string>
+    <string name="auth_error_user_not_found">Nalog nije pronađen</string>
+    <string name="auth_error_wrong_password">Netačna lozinka</string>
+    <string name="auth_error_email_already_in_use">Email je već registrovan</string>
+    <string name="auth_error_weak_password">Lozinka je preslaba</string>
+    <string name="auth_error_network">Provjerite internetsku vezu</string>
+    <string name="auth_error_too_many_requests">Previše pokušanja. Pokušajte kasnije</string>
+    <string name="auth_error_invalid_credential">Neispravni podaci za prijavu</string>
+    <string name="auth_reset_title">Resetujte lozinku</string>
+    <string name="auth_reset_subtitle">Poslat ćemo ti link za promjenu lozinke na email.</string>
+    <string name="auth_reset_send">Pošalji link</string>
+    <string name="auth_reset_sent">Link za reset lozinke poslan na email</string>
+    <string name="auth_registration_success">Registracija uspješna!</string>
+    <string name="auth_login_success">Dobrodošli!</string>
+    <string name="auth_logout">Odjavi se</string>
+
+    <!-- Maskote / Stanja -->
+    <string name="state_empty_events_title">Novi događaji stižu</string>
+    <string name="state_empty_events_body">Ovdje ćeš pronaći objavljene događaje. Provjeri ponovo kasnije.</string>
+    <string name="state_empty_events_cta">Napravi događaj</string>
+    <string name="state_empty_search_title">Nema rezultata</string>
+    <string name="state_empty_search_body">Pokušaj drugu riječ ili kategoriju</string>
+    <string name="state_empty_favorites_title">Sačuvaj za kasnije</string>
+    <string name="state_empty_favorites_body">Dodirni srce na događaju da ga lako pronađeš ovdje.</string>
+    <string name="state_empty_favorites_cta">Pregledaj događaje</string>
+    <string name="favorites_guest_title">Nisi prijavljen/a</string>
+    <string name="favorites_guest_body">Prijavi se da vidiš svoje omiljene događaje</string>
+    <string name="favorites_guest_cta">Prijavi se</string>
+    <string name="event_favorite">Omiljeni</string>
+    <string name="favorite_added">Dodano u omiljene!</string>
+    <string name="favorite_removed">Uklonjeno iz omiljenih</string>
+    <string name="favorite_error">Greška pri promjeni omiljenih</string>
+
+    <!-- Admin -->
+    <string name="admin_dashboard_title">Admin panel</string>
+    <string name="admin_access_denied">Nemate pristup admin panelu</string>
+    <string name="admin_stats_title">Statistike</string>
+    <string name="admin_stat_users">Korisnici</string>
+    <string name="admin_stat_events">Događaji</string>
+    <string name="admin_stat_registrations">Prijave</string>
+    <string name="admin_stat_users_value">Korisnici: %d</string>
+    <string name="admin_stat_events_value">Događaji: %d</string>
+    <string name="admin_stat_registrations_value">Prijave: %d</string>
+    <string name="admin_verifications_title">Verifikacije</string>
+    <string name="admin_verifications_pending">Na čekanju</string>
+    <string name="admin_verifications_pending_count">Na čekanju: %d</string>
+    <string name="admin_no_pending_verifications">Nema zahtjeva na čekanju</string>
+    <string name="admin_view_document">Pogledaj dokaz</string>
+    <string name="admin_approve_title">Odobri verifikaciju</string>
+    <string name="admin_approve_body">Odobriti verifikaciju za %s?</string>
+    <string name="admin_reject_title">Odbij verifikaciju</string>
+    <string name="admin_reject_body">Odbijati verifikaciju za %s?</string>
+    <string name="admin_reject_reason_hint">Razlog odbijanja (obavezno)</string>
+    <string name="admin_reject_reason_required">Unesite razlog odbijanja</string>
+    <string name="admin_approved">Verifikacija odobrena</string>
+    <string name="admin_rejected">Verifikacija odbijena</string>
+    <string name="admin_error">Greška</string>
+    <string name="admin_load_error">Greška pri učitavanju</string>
+    <string name="admin_action_failed">Greška pri izvršavanju akcije</string>
+    <string name="admin_events_title">Svi događaji</string>
+    <string name="admin_no_events">Nema događaja</string>
+    <string name="action_approve">Odobri</string>
+    <string name="action_reject">Odbij</string>
+    <string name="state_success_join_title">Prijavljen si!</string>
+    <string name="state_success_join_body">Vidimo se na događaju</string>
+    <string name="state_error_title">Ups, nešto je puklo</string>
+    <string name="state_error_body">Provjeri internetsku vezu</string>
+    <string name="state_empty_notifications_title">Nema notifikacija</string>
+    <string name="state_empty_notifications_body">Obavijestit ćemo te kad se nešto dogodi</string>
+    <string name="state_empty_my_events_title">Još nemaš događaja</string>
+    <string name="state_empty_my_events_body">Ovdje se prikazuju događaji na koje se prijaviš.</string>
+    <string name="state_empty_my_events_cta">Pregledaj događaje</string>
+    <string name="my_events_guest_title">Nisi prijavljen/a</string>
+    <string name="my_events_guest_body">Prijavi se da vidiš svoje događaje</string>
+    <string name="my_events_guest_cta">Prijavi se</string>
+    <string name="state_logout_title">Vidimo se opet!</string>
+    <string name="state_logout_body">Sigurno se želiš odjaviti?</string>
+    <string name="state_logout_confirm">Odjavi se</string>
+    <string name="state_logout_stay">Ostani</string>
+
+    <!-- Home -->
+    <string name="home_hello">Istraži događaje</string>
+    <string name="home_hello_name">Zdravo, %1$s</string>
+    <string name="home_guest_subtitle">Pregledaj događaje. Prijavi se kada želiš učestvovati.</string>
+    <string name="home_user_subtitle">Pronađi događaj za svoj sljedeći slobodan dan.</string>
+    <string name="settings_title">Postavke</string>
+    <string name="home_search_hint">Pretraži događaje…</string>
+    <string name="home_add_event">Dodaj događaj</string>
+    <string name="home_loading_events">Učitavanje događaja…</string>
+
+    <!-- Event kartica -->
+    <string name="event_spots">%1$d od %2$d mjesta slobodno</string>
+    <string name="event_capacity_full">Popunjeno</string>
+    <string name="event_participants">%1$d/%2$d učesnika</string>
+    <string name="event_volunteers">%1$d/%2$d volontera</string>
+
+    <!-- Detalji događaja -->
+    <string name="event_details_title">Detalji događaja</string>
+    <string name="event_no_description">Nema opisa.</string>
+    <string name="event_join_as_participant">Prijavi se kao učesnik</string>
+    <string name="event_join_as_volunteer">Prijavi se kao volonter</string>
+    <string name="event_edit">Uredi događaj</string>
+    <string name="event_delete">Obriši događaj</string>
+    <string name="event_delete_confirm_title">Brisanje događaja</string>
+    <string name="event_delete_confirm_body">Da li ste sigurni da želite obrisati ovaj događaj?</string>
+    <string name="event_deleted">Događaj izbrisan.</string>
+    <string name="event_delete_error">Greška pri brisanju događaja</string>
+    <string name="event_load_error">Greška pri učitavanju događaja</string>
+    <string name="event_not_found">Ovaj događaj više ne postoji.</string>
+    <string name="event_already_registered">Već ste prijavljeni na ovaj događaj</string>
+
+    <!-- Kreiranje / Edit događaja -->
+    <string name="event_create_title">Napravi događaj</string>
+    <string name="event_add_favorite">Dodaj u omiljene</string>
+    <string name="event_remove_favorite">Ukloni iz omiljenih</string>
+    <string name="upload_progress_wait">Sačekajte da se slika prenese</string>
+    <string name="event_edit_title">Uredi događaj</string>
+    <string name="event_field_title">Naslov događaja</string>
+    <string name="event_field_description">Opis</string>
+    <string name="event_field_category">Kategorija</string>
+    <string name="event_field_date">Datum</string>
+    <string name="event_field_location">Lokacija</string>
+    <string name="event_field_max_participants">Maksimalno učesnika</string>
+    <string name="event_field_max_volunteers">Maksimalno volontera</string>
+    <string name="event_field_needs_volunteers">Potrebni volonteri</string>
+    <string name="event_pick_image">Odaberi sliku</string>
+    <string name="event_select_date">Odaberite datum događaja</string>
+    <string name="event_create_success">Događaj uspješno kreiran!</string>
+    <string name="event_edit_success">Događaj uspješno ažuriran!</string>
+    <string name="event_save_error">Greška pri spremanju događaja</string>
+    <string name="upload_success">Slika uploadovana!</string>
+    <string name="upload_error">Greška pri uploadu slike</string>
+    <string name="upload_progress">Upload: %1$d%%</string>
+    <string name="organizer_default_name">Organizator</string>
+    <string name="event_error_name_required">Unesite naslov događaja</string>
+    <string name="event_error_invalid_number">Unesite ispravan broj</string>
+    <string name="event_error_fill_required">Molimo popunite obavezna polja</string>
+
+    <!-- Profil -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_new_user">Novi korisnik</string>
+    <string name="profile_avatar">Profilna slika</string>
+    <string name="profile_phone">Telefon</string>
+    <string name="profile_bio">O meni</string>
+    <string name="profile_verification_status">Status verifikacije</string>
+    <string name="profile_edit">Uredi profil</string>
+    <string name="profile_become_organizer">Postani organizator</string>
+    <string name="profile_not_set">Nije postavljeno</string>
+    <string name="profile_guest_title">Tvoje mjesto u Eventlyju</string>
+    <string name="profile_guest_body">Prijavi se za svoj profil, sačuvane događaje i prijave.</string>
+    <string name="profile_updated">Profil ažuriran!</string>
+    <string name="profile_tap_to_change_photo">Promijeni profilnu sliku</string>
+    <string name="profile_name">Ime i prezime</string>
+
+    <!-- Uloge -->
+    <string name="role_participant">Učesnik</string>
+    <string name="role_organizer">Organizator</string>
+
+    <!-- Verifikacija -->
+    <string name="verification_none">Nije verificiran</string>
+    <string name="verification_pending">Verifikacija na čekanju</string>
+    <string name="verification_pending_body">Zahtjev je poslan na pregled. Status će se ažurirati nakon odluke.</string>
+    <string name="verification_verified">Verificiran organizator</string>
+    <string name="verification_verified_body">Tvoj identitet je potvrđen. Možeš kreirati događaje.</string>
+    <string name="verification_rejected">Verifikacija odbijena</string>
+    <string name="verification_rejected_body">Tvoj zahtjev je odbijen.</string>
+
+    <!-- Zahtjev verifikacije -->
+    <string name="verification_request_title">Zahtjev za verifikaciju</string>
+    <string name="verification_request_description">Pošalji naziv organizacije i dokaz identiteta ili tima. Nakon odobrenja možeš objavljivati događaje.</string>
+    <string name="verification_org_name">Naziv organizacije / tima</string>
+    <string name="verification_upload_proof">Dokaz identiteta</string>
+    <string name="verification_tap_upload">Odaberi čitljivu sliku dokumenta.</string>
+    <string name="verification_select_proof">Odaberi sliku</string>
+    <string name="verification_proof_preview">Pregled dokaza</string>
+    <string name="verification_submit">Pošalji zahtjev</string>
+    <string name="verification_cancel">Odustani od zahtjeva</string>
+    <string name="verification_request_again">Pokušaj ponovno</string>
+    <string name="verification_success">Zahtjev poslan! Administratori će ga pregledati.</string>
+    <string name="verification_cancelled">Zahtjev otkazan</string>
+    <string name="verification_error">Greška pri slanju zahtjeva</string>
+    <string name="verification_error_fill">Molimo popunite sva polja i dodajte dokaz</string>
+    <string name="verification_change_proof">Promijeni dokaz</string>
+    <string name="profile_save_error">Greška pri spremanju profila</string>
+    <string name="profile_load_error">Greška pri učitavanju profila</string>
+
+    <!-- Fragment naslovi -->
+    <string name="my_events_organized_title">Moji događaji</string>
+    <string name="my_events_registered_title">Moje prijave</string>
+
+    <!-- Registracije -->
+    <string name="registration_success">Uspješno ste prijavljeni!</string>
+    <string name="registration_cancelled">Prijava otkazana</string>
+    <string name="registration_error_generic">Greška pri prijavi. Pokušajte ponovo.</string>
+    <string name="registration_error_full">Nema više mjesta</string>
+    <string name="registration_error_closed">Prijave su zatvorene</string>
+    <string name="registration_error_already">Već ste prijavljeni</string>
+    <string name="registration_cancel_confirm_title">Otkazivanje prijave</string>
+    <string name="registration_cancel_confirm_body">Da li želite otkazati prijavu na ovaj događaj?</string>
+    <string name="registration_unregister">Odjavi se</string>
+    <string name="registration_type_participant">Učesnik</string>
+    <string name="registration_type_volunteer">Volonter</string>
+
+    <!-- Organizer: Pregled prijava -->
+    <string name="organizer_registrations_title">Prijave</string>
+    <string name="organizer_registrations_empty">Nema prijava za ovaj događaj</string>
+    <string name="organizer_remove_registration">Ukloni prijavu</string>
+    <string name="organizer_remove_confirm_title">Ukloni prijavu</string>
+    <string name="organizer_remove_confirm_body">Ukloniti %1$s sa liste prijava?</string>
+    <string name="registration_removed">Prijava uklonjena</string>
+
+    <!-- Admin labele -->
+    <string name="admin_uid_label">UID: %1$s</string>
+    <string name="admin_organizer_label">Org: %1$s</string>
+    <string name="home_section_upcoming">Dostupni događaji</string>
+    <string name="favorites_section_saved">Sve što želiš sačuvati za kasnije.</string>
+    <string name="my_events_section_yours">Tvoje prijave i događaji koje organizuješ.</string>
+    <string name="profile_section_about">O tebi</string>
+    <string name="profile_section_account">Tvoj nalog</string>
+    <string name="settings_section_account">Nalog</string>
+    <string name="settings_section_session">Sesija</string>
+    <string name="event_form_section_basics">Osnovne informacije</string>
+    <string name="event_form_section_schedule">Kada i gdje</string>
+    <string name="event_form_section_capacity">Mjesta i volonteri</string>
+    <string name="admin_pending_section">Zahtjevi za pregled</string>
+    <string name="e_about_event">O događaju</string>
+    <string name="e_organizer">Organizator</string>
+    <string name="e_availability">Učešće</string>
+    <string name="e_participants">Učesnici</string>
+    <string name="e_volunteers">Volonteri</string>
+    <string name="e_manage_event">Upravljanje događajem</string>
+    <string name="e_event_image">Slika događaja</string>
+    <string name="e_image_optional">Neobavezno. Odaberi sliku koja predstavlja događaj.</string>
+    <string name="e_review_verification">Pregledaj zahtjev</string>
+    <string name="e_resubmit_verification">Pregledaj i pošalji ponovo</string>
+    <string name="e_admin_overview">Pregled platforme</string>
+    <string name="e_registration_open">Prijave su otvorene</string>
+    <string name="e_registration_closed">Prijave su zatvorene</string>
+    <string name="e_auth_back">Nazad na događaje</string>
+    <string name="e_loading">Učitavanje</string>
+    <string name="e_event_open_description">Otvori događaj: %1$s</string>
 </resources>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".EventlyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,23 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting">
         <activity
-            android:name=".home.EventDetailsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Evently" />
-        <activity
-            android:name=".home.EventManagerActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Evently" />
-        <activity
-            android:name=".ui.auth.RegisterActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Evently" />
-        <activity
-            android:name=".home.HomeActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Evently" />
-        <activity
-            android:name=".ui.auth.MainActivity"
+            android:name=".ui.activities.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Evently">
             <intent-filter>
@@ -37,6 +22,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity
+            android:name=".ui.auth.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity
+            android:name=".ui.auth.ResetPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+                <activity
+            android:name=".ui.activities.EventDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity
+            android:name=".ui.activities.EventManagerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity
+            android:name=".ui.activities.EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity
+            android:name=".ui.activities.VerificationRequestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity
+            android:name=".ui.activities.AdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity android:name=".ui.activities.SettingsActivity" android:exported="false"
+            android:theme="@style/Theme.Evently" />
+        <activity android:name=".ui.activities.ChangePasswordActivity" android:exported="false"
+            android:theme="@style/Theme.Evently" />
     </application>
 
 </manifest>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="event_available_short">%1$d places left</string>
+    <string name="category_music">Music</string>
+    <string name="category_sport">Sport</string>
+    <string name="category_education">Education</string>
+    <string name="category_culture">Culture</string>
+    <string name="category_charity">Charity</string>
+    <string name="category_volunteering">Volunteering</string>
+    <string name="category_social">Social</string>
+    <string name="category_other">Other</string>
+    <string name="event_category_choose">Choose a category</string>
+    <string name="event_category_legacy">Choose a category for this existing event.</string>
+    <string name="event_publish_intro">Turn an idea into a gathering.</string>
+    <string name="event_publish_body">Introduce your event and help people find their place.</string>
+    <string name="event_publish_action">Publish event</string>
+    <string name="event_date_choose">Choose a date</string>
+    <string name="event_volunteer_hint">Enable if you need help running the event.</string>
+    <string name="event_image_ready">Image is ready.</string>
+    <string name="event_image_replace">Replace image</string>
+    <string name="event_image_retry">Retry image upload</string>
+    <string name="profile_account_hint">Your preferences and account</string>
+</resources>

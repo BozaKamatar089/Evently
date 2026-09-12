@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_delete_requires_empty">Brisanje zahtijeva odjavu svih učesnika</string>
+    <string name="d1_sign_in_participant">Prijavi se za učešće</string>
+    <string name="d1_sign_in_volunteer">Prijavi se za volontiranje</string>
+</resources>

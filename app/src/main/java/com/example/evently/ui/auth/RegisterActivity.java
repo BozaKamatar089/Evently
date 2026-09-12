@@ -3,122 +3,131 @@ package com.example.evently.ui.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.example.evently.R;
 import com.example.evently.data.auth.AuthRepositoryImpl;
-import com.example.evently.domain.auth.AuthRepository;
+import com.example.evently.data.user.UserRepositoryImpl;
+import com.example.evently.databinding.ActivityRegisterBinding;
+import com.example.evently.ui.activities.HomeActivity;
+import com.example.evently.util.PendingActionManager;
+import com.example.evently.util.AuthenticatedNavigator;
+import com.example.evently.data.AppDependencies;
+import com.example.evently.viewmodel.SessionViewModel;
+import com.example.evently.viewmodel.SessionViewModelFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private ActivityRegisterBinding binding;
     private AuthViewModel authViewModel;
-    private TextInputEditText etFirstName, etLastName, etPhone, etEmail, etPassword, etConfirmPassword;
-    private ProgressBar progressBar;
+    private SessionViewModel sessionViewModel;
+    private boolean awaitingProfileReady;
+    private boolean navigating;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.toolbar.setNavigationOnClickListener(v -> finish());
 
-        etFirstName = findViewById(R.id.etFirstName);
-        etLastName = findViewById(R.id.etLastName);
-        etPhone = findViewById(R.id.etPhone);
-        etEmail = findViewById(R.id.etEmailReg);
-        etPassword = findViewById(R.id.etPasswordReg);
-        etConfirmPassword = findViewById(R.id.etConfirmPassword);
-        Button btnRegister = findViewById(R.id.btnRegister);
-        TextView tvGoToLogin = findViewById(R.id.tvGoToLogin);
-        progressBar = findViewById(R.id.progressBarReg);
+        AuthRepositoryImpl authRepository = new AuthRepositoryImpl();
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+        authViewModel = new ViewModelProvider(this,
+                new AuthViewModelFactory(authRepository, userRepository))
+                .get(AuthViewModel.class);
+        sessionViewModel = new ViewModelProvider(this,
+                new SessionViewModelFactory(AppDependencies.sessionRepository())).get(SessionViewModel.class);
+        sessionViewModel.start();
 
-        AuthRepository authRepository = new AuthRepositoryImpl();
+        binding.btnRegister.setOnClickListener(v -> onRegisterClicked());
+        binding.tvGoToLogin.setOnClickListener(v -> finish());
 
-        authViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
-            @Override
-            public <T extends ViewModel> T create(Class<T> modelClass) {
-                if (modelClass.isAssignableFrom(AuthViewModel.class)) {
-                    return (T) new AuthViewModel(authRepository);
-                }
-                throw new IllegalArgumentException("Unknown ViewModel class");
-            }
-        }).get(AuthViewModel.class);
+        observeViewModel();
+    }
 
+    private void observeViewModel() {
         authViewModel.getLoading().observe(this, isLoading -> {
             if (isLoading != null) {
-                progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-                btnRegister.setEnabled(!isLoading);
+                binding.progressBarReg.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+                binding.btnRegister.setEnabled(!isLoading);
             }
         });
 
         authViewModel.getUser().observe(this, firebaseUser -> {
             if (firebaseUser != null) {
-
-                String fullName = etFirstName.getText().toString().trim() + " " + etLastName.getText().toString().trim();
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(fullName)
-                        .build();
-
-                firebaseUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
-                    Toast.makeText(this, "Registracija uspješna!", Toast.LENGTH_SHORT).show();
-                    goToHome();
-                });
+                Toast.makeText(this, R.string.auth_registration_success, Toast.LENGTH_SHORT).show();
+                awaitingProfileReady = true;
+                continueWhenReady();
             }
+        });
+        sessionViewModel.getState().observe(this, state -> {
+            continueWhenReady();
         });
 
         authViewModel.getError().observe(this, error -> {
             if (error != null && !error.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Greška: " + error, Toast.LENGTH_LONG).show();
+                binding.progressBarReg.setVisibility(View.GONE);
+                binding.btnRegister.setEnabled(true);
+                showError(com.example.evently.util.ErrorMapper.toResId(error));
             }
-        });
-
-        btnRegister.setOnClickListener(v -> {
-            String firstName = etFirstName.getText() != null ? etFirstName.getText().toString().trim() : "";
-            String lastName = etLastName.getText() != null ? etLastName.getText().toString().trim() : "";
-            String phone = etPhone.getText() != null ? etPhone.getText().toString().trim() : "";
-            String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
-            String password = etPassword.getText() != null ? etPassword.getText().toString().trim() : "";
-            String confirmPassword = etConfirmPassword.getText() != null ? etConfirmPassword.getText().toString().trim() : "";
-
-            if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(email) ||
-                    TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-                Toast.makeText(this, "Molimo popunite sva obavezna polja", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (!password.equals(confirmPassword)) {
-                Toast.makeText(this, "Lozinke se ne poklapaju!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (password.length() < 6) {
-                Toast.makeText(this, "Lozinka mora imati barem 6 karaktera", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-
-
-            progressBar.setVisibility(View.VISIBLE);
-            authViewModel.register(email, password);
-        });
-
-        tvGoToLogin.setOnClickListener(v -> {
-            finish();
         });
     }
 
-    private void goToHome() {
+    private void continueWhenReady() {
+        com.example.evently.domain.session.SessionState state = sessionViewModel.getState().getValue();
+        if (!navigating && awaitingProfileReady && state != null && state.isAuthenticated()
+                && authViewModel.getUser().getValue() != null
+                && state.getUid().equals(authViewModel.getUser().getValue().getUid())) {
+            navigating = true;
+            awaitingProfileReady = false;
+            AuthenticatedNavigator.continueAfterProfileReady(this);
+        }
+    }
 
-        Toast.makeText(this, "Otvaram Home ekran...", Toast.LENGTH_SHORT).show();
-        finish();
+
+    private void onRegisterClicked() {
+        binding.tvRegisterError.setVisibility(View.GONE);
+        String firstName = textOf(binding.etFirstName);
+        String lastName = textOf(binding.etLastName);
+        String email = textOf(binding.etEmailReg);
+        String password = textOf(binding.etPasswordReg);
+        String confirm = textOf(binding.etConfirmPassword);
+
+        if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)
+                || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            showError(R.string.auth_error_empty_fields);
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.etEmailReg.setError(getString(R.string.auth_error_invalid_email));
+            binding.etEmailReg.requestFocus();
+            return;
+        }
+        if (password.length() < 6) {
+            binding.etPasswordReg.setError(getString(R.string.auth_error_password_short));
+            return;
+        }
+        if (!password.equals(confirm)) {
+            binding.etConfirmPassword.setError(getString(R.string.auth_error_password_mismatch));
+            return;
+        }
+        authViewModel.register(firstName, lastName, email, password);
+    }
+
+    private void showError(@StringRes int message) {
+        binding.tvRegisterError.setText(message);
+        binding.tvRegisterError.setVisibility(View.VISIBLE);
+    }
+
+    private String textOf(android.widget.EditText editText) {
+        return editText.getText() != null ? editText.getText().toString().trim() : "";
     }
 }

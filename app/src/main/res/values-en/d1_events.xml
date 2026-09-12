@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_event_load_error">The event could not be loaded.</string>
+    <string name="d1_retry">Try again</string>
+    <string name="d1_registration_closed">Registration is closed</string>
+    <string name="d1_event_unavailable">Event unavailable</string>
+    <string name="d1_event_ended">Event has ended</string>
+    <string name="d1_no_volunteers">Volunteers are not needed</string>
+    <string name="d1_attendee">Registered attendee</string>
+    <string name="d1_capacity_below_occupancy">Capacity cannot be lower than current attendance.</string>
+    <string name="d1_event_date_expired">Choose today or a future date.</string>
+    <string name="d1_event_form_error">Changes were not saved. Check your connection and try again.</string>
+    <string name="d1_dismiss">OK</string>
+</resources>

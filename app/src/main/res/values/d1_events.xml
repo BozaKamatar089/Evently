@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="d1_event_load_error">Događaj se nije mogao učitati.</string>
+    <string name="d1_retry">Pokušaj ponovo</string>
+    <string name="d1_registration_closed">Prijave su zatvorene</string>
+    <string name="d1_event_unavailable">Događaj nije dostupan</string>
+    <string name="d1_event_ended">Događaj je završen</string>
+    <string name="d1_no_volunteers">Volonteri nisu potrebni</string>
+    <string name="d1_attendee">Prijavljeni korisnik</string>
+    <string name="d1_capacity_below_occupancy">Kapacitet ne može biti manji od trenutnog broja prijavljenih.</string>
+    <string name="d1_event_date_expired">Odaberite današnji ili budući datum.</string>
+    <string name="d1_event_form_error">Promjene nisu sačuvane. Provjerite vezu i pokušajte ponovo.</string>
+    <string name="d1_dismiss">U redu</string>
+</resources>
