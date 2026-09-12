@@ -37,6 +37,9 @@ public final class RegistrationAdapter extends ListAdapter<Registration, Registr
 
     private final OnRemoveClickListener onRemoveClickListener;
 
+    /** Reused across binds; binding happens on the main thread only, so SimpleDateFormat is safe. */
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
     public RegistrationAdapter(@NonNull OnRemoveClickListener onRemoveClickListener) {
         super(DIFF);
         this.onRemoveClickListener = onRemoveClickListener;
@@ -72,8 +75,7 @@ public final class RegistrationAdapter extends ListAdapter<Registration, Registr
             binding.tvRegistrationUser.setText(R.string.d1_attendee);
 
             if (registration.getRegisteredAt() > 0) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-                binding.tvRegistrationDate.setText(sdf.format(new Date(registration.getRegisteredAt())));
+                binding.tvRegistrationDate.setText(dateFormat.format(new Date(registration.getRegisteredAt())));
             } else {
                 binding.tvRegistrationDate.setText("");
             }

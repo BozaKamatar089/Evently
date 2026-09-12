@@ -18,6 +18,7 @@ import com.example.evently.data.model.Event;
 import com.example.evently.databinding.ItemEventBinding;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class EventAdapter extends ListAdapter<Event, EventAdapter.EventViewHolde
         this.favoriteListener = favoriteListener;
     }
 
-    private static final DiffUtil.ItemCallback<Event> DIFF_CALLBACK = new DiffUtil.ItemCallback<Event>() {
+    static final DiffUtil.ItemCallback<Event> DIFF_CALLBACK = new DiffUtil.ItemCallback<Event>() {
         @Override
         public boolean areItemsTheSame(@NonNull Event oldItem, @NonNull Event newItem) {
             return Objects.equals(oldItem.getId(), newItem.getId());
@@ -119,10 +120,46 @@ public class EventAdapter extends ListAdapter<Event, EventAdapter.EventViewHolde
     }
 
     public void setFavoriteIds(@NonNull Set<String> ids) {
+        // Diff the previous and new favorite sets against the currently displayed list and
+        // rebind only rows whose favorite membership actually flipped. This avoids a full
+        // notifyDataSetChanged() (and with it a Glide reload of every visible image) on each
+        // favorites snapshot, while still keeping the realtime listener authoritative for
+        // the stored set. O(n) in list size; no mutation of the DiffUtil-managed list.
+        List<String> orderedIds = new ArrayList<>();
+        for (Event event : getCurrentList()) {
+            orderedIds.add(event.getId());
+        }
+        Set<String> changed = changedFavoriteIds(favoriteEventIds, ids, orderedIds);
         favoriteEventIds.clear();
         favoriteEventIds.addAll(ids);
-        // DiffUtil will handle this via submitList, but we need to notify visible items
-        notifyDataSetChanged(); // Only for favorite state bulk update - acceptable
+        if (changed.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < orderedIds.size(); i++) {
+            if (changed.contains(orderedIds.get(i))) {
+                notifyItemChanged(i, "FAVORITE_CHANGED");
+            }
+        }
+    }
+
+    /**
+     * Pure helper: returns the subset of {@code orderedIds} whose favorite membership
+     * differs between {@code previous} and {@code next}. Ids not present in
+     * {@code orderedIds} are ignored (they are not rendered by this adapter instance).
+     */
+    static Set<String> changedFavoriteIds(@NonNull Set<String> previous,
+                                          @NonNull Set<String> next,
+                                          @NonNull List<String> orderedIds) {
+        Set<String> changed = new HashSet<>();
+        for (String id : orderedIds) {
+            if (id == null) {
+                continue;
+            }
+            if (previous.contains(id) != next.contains(id)) {
+                changed.add(id);
+            }
+        }
+        return changed;
     }
 
     private int findPositionById(@NonNull String eventId) {

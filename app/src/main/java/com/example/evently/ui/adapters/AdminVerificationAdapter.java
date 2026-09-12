@@ -24,7 +24,7 @@ public final class AdminVerificationAdapter
         void onReject(@NonNull VerificationRequest request);
     }
 
-    private static final DiffUtil.ItemCallback<VerificationRequest> DIFF =
+    static final DiffUtil.ItemCallback<VerificationRequest> DIFF =
             new DiffUtil.ItemCallback<VerificationRequest>() {
                 @Override public boolean areItemsTheSame(@NonNull VerificationRequest left,
                                                          @NonNull VerificationRequest right) {
@@ -33,6 +33,7 @@ public final class AdminVerificationAdapter
                 @Override public boolean areContentsTheSame(@NonNull VerificationRequest left,
                                                             @NonNull VerificationRequest right) {
                     return Objects.equals(left.getStatus(), right.getStatus())
+                            && Objects.equals(left.getUserId(), right.getUserId())
                             && Objects.equals(left.getOrgName(), right.getOrgName())
                             && Objects.equals(left.getDocumentUrl(), right.getDocumentUrl())
                             && left.getCreatedAt() == right.getCreatedAt();
