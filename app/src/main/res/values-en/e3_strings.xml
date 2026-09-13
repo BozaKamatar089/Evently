@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="event_available_short">%1$d places left</string>
+    <plurals name="event_available_short">
+        <item quantity="one">%1$d place left</item>
+        <item quantity="other">%1$d places left</item>
+    </plurals>
     <string name="category_music">Music</string>
     <string name="category_sport">Sport</string>
     <string name="category_education">Education</string>

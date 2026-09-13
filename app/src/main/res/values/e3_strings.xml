@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="event_available_short">%1$d mjesta slobodno</string>
+    <plurals name="event_available_short">
+        <item quantity="one">%1$d mjesto slobodno</item>
+        <item quantity="few">%1$d mjesta slobodno</item>
+        <item quantity="other">%1$d mjesta slobodno</item>
+    </plurals>
     <string name="category_music">Muzika</string>
     <string name="category_sport">Sport</string>
     <string name="category_education">Edukacija</string>

@@ -16,41 +16,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.evently.R;
-import com.example.evently.data.event.EventRepositoryImpl;
 import com.example.evently.data.AppDependencies;
 import com.example.evently.data.model.Event;
 import com.example.evently.data.model.Registration;
-import com.example.evently.data.registration.RegistrationRepositoryImpl;
 import com.example.evently.databinding.ActivityEventDetailsBinding;
-import com.example.evently.domain.event.EventRepository;
-import com.example.evently.domain.registration.RegistrationRepository;
 import com.example.evently.ui.adapters.RegistrationAdapter;
 import com.example.evently.util.PendingActionManager;
 import com.example.evently.util.AuthGate;
 import com.example.evently.util.EventActionEligibility;
 import com.google.android.material.button.MaterialButton;
 import androidx.lifecycle.ViewModelProvider;
+import com.example.evently.viewmodel.EventDetailViewModel;
+import com.example.evently.viewmodel.EventDetailViewModelFactory;
 import com.example.evently.viewmodel.SessionViewModel;
 import com.example.evently.viewmodel.SessionViewModelFactory;
 import com.example.evently.domain.session.SessionState;
 
 import com.example.evently.util.ErrorMapper;
 
-import com.google.firebase.firestore.ListenerRegistration;
-
 
 public class EventDetailsActivity extends AppCompatActivity {
 
     private ActivityEventDetailsBinding binding;
-    private EventRepository eventRepository;
-    private RegistrationRepository registrationRepository;
+    private EventDetailViewModel detailViewModel;
     private String eventId;
 
     private boolean isOrganizer = false;
     private Registration myRegistration;
     private Event currentEvent;
-    private ListenerRegistration eventListener;
-    private ListenerRegistration registrationsDialogListener;
     private SessionViewModel sessionViewModel;
     private com.example.evently.viewmodel.FavoriteActionViewModel favoriteViewModel;
     private String currentUid = "";
@@ -58,8 +51,6 @@ public class EventDetailsActivity extends AppCompatActivity {
     private String replayType;
     private boolean registrationOperationInProgress;
     private boolean sessionReady;
-    private int eventGeneration;
-    private int registrationReadGeneration;
     private AlertDialog registrationsDialog;
 
     public static Intent createIntent(Context context, String eventId) {
@@ -74,8 +65,11 @@ public class EventDetailsActivity extends AppCompatActivity {
         binding = ActivityEventDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        eventRepository = new EventRepositoryImpl();
-        registrationRepository = new RegistrationRepositoryImpl();
+        detailViewModel = new ViewModelProvider(this,
+                new EventDetailViewModelFactory(
+                        AppDependencies.eventRepository(),
+                        AppDependencies.registrationRepository()))
+                .get(EventDetailViewModel.class);
         favoriteViewModel = new ViewModelProvider(this,
                 new com.example.evently.viewmodel.FavoriteActionViewModelFactory(
                         new com.example.evently.data.favorites.FavoriteRepositoryImpl()))
@@ -101,7 +95,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 new SessionViewModelFactory(AppDependencies.sessionRepository()))
                 .get(SessionViewModel.class);
         sessionViewModel.getState().observe(this, state -> {
-            registrationReadGeneration++;
+            detailViewModel.invalidateRegistrationReads();
             myRegistration = null;
             currentUid = state != null && state.isAuthenticated() && state.getUid() != null
                     ? state.getUid() : "";
@@ -170,14 +164,13 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void startEventListener() {
-        if (eventListener != null || eventId == null) return;
+        if (eventId == null) return;
         currentEvent = null;
-        final int generation = ++eventGeneration;
         binding.progressBarDetails.setVisibility(View.VISIBLE);
         binding.errorDetails.setVisibility(View.GONE);
         binding.contentDetails.setVisibility(View.GONE);
-        eventListener = eventRepository.listenEvent(eventId, (event, error) -> {
-            if (generation != eventGeneration || isDestroyed()) return;
+        detailViewModel.startEventListener(eventId, (event, error) -> {
+            if (isDestroyed()) return;
             if (error != null) {
                 currentEvent = null;
                 showDetailsMessage(R.string.d1_event_load_error, true);
@@ -197,12 +190,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void stopEventListener() {
-        eventGeneration++;
-        registrationReadGeneration++;
-        if (eventListener != null) {
-            eventListener.remove();
-            eventListener = null;
-        }
+        detailViewModel.stopEventListener();
     }
 
     private void showDetailsMessage(int message, boolean retry) {
@@ -311,7 +299,6 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void checkRegistrationAndSetupButtons(String myUserId, Event event) {
-        final int readGeneration = ++registrationReadGeneration;
         binding.btnJoinParticipant.setEnabled(false);
         binding.btnJoinVolunteer.setEnabled(false);
         if (myUserId.isEmpty()) {
@@ -320,17 +307,16 @@ public class EventDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        registrationRepository.getRegistration(eventId)
-                .addOnSuccessListener(registration -> {
-                    if (readGeneration != registrationReadGeneration || !myUserId.equals(currentUid) || isDestroyed()) return;
-                    myRegistration = registration;
-                    setupUserButtons(event, registration);
-                    replayWhenReady(event, registration);
-                })
-                .addOnFailureListener(e -> {
-                    if (readGeneration != registrationReadGeneration || !myUserId.equals(currentUid) || isDestroyed()) return;
-                    showDetailsMessage(R.string.d1_event_load_error, true);
-                });
+        detailViewModel.fetchMyRegistration(eventId, (registration, errorCode) -> {
+            if (!myUserId.equals(currentUid) || isDestroyed()) return;
+            if (errorCode != null) {
+                showDetailsMessage(R.string.d1_event_load_error, true);
+                return;
+            }
+            myRegistration = registration;
+            setupUserButtons(event, registration);
+            replayWhenReady(event, registration);
+        });
     }
 
     private void replayWhenReady(Event event, Registration registration) {
@@ -434,28 +420,31 @@ public class EventDetailsActivity extends AppCompatActivity {
         binding.btnJoinParticipant.setEnabled(false);
         binding.btnJoinVolunteer.setEnabled(false);
         binding.progressBarDetails.setVisibility(View.VISIBLE);
-        registrationRepository.register(eventId, type)
-                .addOnSuccessListener(aVoid -> {
-                    registrationOperationInProgress = false;
-                    if (isDestroyed() || !operationUid.equals(currentUid)) return;
-                    binding.progressBarDetails.setVisibility(View.GONE);
-                    Toast.makeText(this, R.string.registration_success, Toast.LENGTH_SHORT).show();
-                    if (getIntent().getBooleanExtra("PENDING_ACTION_REPLAY", false)) {
-                        new PendingActionManager(this).finishConsumption(true);
-                        getIntent().removeExtra("PENDING_ACTION_REPLAY");
-                    }
-                    // Realtime listener will auto-refresh
-                    if (currentEvent != null) checkRegistrationAndSetupButtons(currentUid, currentEvent);
-                })
-                .addOnFailureListener(e -> {
-                    registrationOperationInProgress = false;
-                    if (isDestroyed() || !operationUid.equals(currentUid)) return;
-                    binding.progressBarDetails.setVisibility(View.GONE);
-                    if (getIntent().getBooleanExtra("PENDING_ACTION_REPLAY", false)) {
-                        new PendingActionManager(this).finishConsumption(false);
-                    }
-                    handleRegistrationError(e.getMessage());
-                });
+        detailViewModel.register(eventId, type, new EventDetailViewModel.OperationCallback() {
+            @Override public void onSuccess() {
+                registrationOperationInProgress = false;
+                if (isDestroyed() || !operationUid.equals(currentUid)) return;
+                binding.progressBarDetails.setVisibility(View.GONE);
+                Toast.makeText(EventDetailsActivity.this, R.string.registration_success, Toast.LENGTH_SHORT).show();
+                if (getIntent().getBooleanExtra("PENDING_ACTION_REPLAY", false)) {
+                    new PendingActionManager(EventDetailsActivity.this).finishConsumption(true);
+                    getIntent().removeExtra("PENDING_ACTION_REPLAY");
+                }
+                // Realtime listener will auto-refresh: the registration transaction
+                // always mutates the Event counters, so the event snapshot re-renders
+                // the buttons (displayEventData -> checkRegistrationAndSetupButtons);
+                // an extra manual read here would duplicate that work.
+            }
+            @Override public void onError(String errorCode) {
+                registrationOperationInProgress = false;
+                if (isDestroyed() || !operationUid.equals(currentUid)) return;
+                binding.progressBarDetails.setVisibility(View.GONE);
+                if (getIntent().getBooleanExtra("PENDING_ACTION_REPLAY", false)) {
+                    new PendingActionManager(EventDetailsActivity.this).finishConsumption(false);
+                }
+                handleRegistrationError(errorCode);
+            }
+        });
     }
 
     private void handleRegistrationError(String errorMsg) {
@@ -479,20 +468,21 @@ public class EventDetailsActivity extends AppCompatActivity {
         binding.btnJoinParticipant.setEnabled(false);
         binding.btnJoinVolunteer.setEnabled(false);
         binding.progressBarDetails.setVisibility(View.VISIBLE);
-        registrationRepository.cancelRegistration(eventId)
-                .addOnSuccessListener(aVoid -> {
-                    registrationOperationInProgress = false;
-                    if (isDestroyed() || !operationUid.equals(currentUid)) return;
-                    binding.progressBarDetails.setVisibility(View.GONE);
-                    Toast.makeText(this, R.string.registration_cancelled, Toast.LENGTH_SHORT).show();
-                    myRegistration = null;
-                    if (currentEvent != null) checkRegistrationAndSetupButtons(currentUid, currentEvent);
-                })
-                .addOnFailureListener(e -> {
-                    registrationOperationInProgress = false;
-                    if (isDestroyed() || !operationUid.equals(currentUid)) return;
-                    handleRegistrationError(e.getMessage());
-                });
+        detailViewModel.cancelRegistration(eventId, new EventDetailViewModel.OperationCallback() {
+            @Override public void onSuccess() {
+                registrationOperationInProgress = false;
+                if (isDestroyed() || !operationUid.equals(currentUid)) return;
+                binding.progressBarDetails.setVisibility(View.GONE);
+                Toast.makeText(EventDetailsActivity.this, R.string.registration_cancelled, Toast.LENGTH_SHORT).show();
+                myRegistration = null;
+                // Realtime listener will auto-refresh (see registerAs).
+            }
+            @Override public void onError(String errorCode) {
+                registrationOperationInProgress = false;
+                if (isDestroyed() || !operationUid.equals(currentUid)) return;
+                handleRegistrationError(errorCode);
+            }
+        });
     }
 
     private void openEditEventActivity(Event event) {
@@ -546,8 +536,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         progressBar.setVisibility(View.VISIBLE);
-        stopRegistrationsDialogListener();
-        registrationsDialogListener = registrationRepository.listenEventRegistrations(eventId, (registrations, error) -> {
+        detailViewModel.startEventRegistrationsListener(eventId, (registrations, error) -> {
             if (isDestroyed() || registrationsDialog != dialog) return;
             progressBar.setVisibility(View.GONE);
             if (error != null) {
@@ -574,10 +563,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void stopRegistrationsDialogListener() {
-        if (registrationsDialogListener != null) {
-            registrationsDialogListener.remove();
-            registrationsDialogListener = null;
-        }
+        detailViewModel.stopEventRegistrationsListener();
     }
 
     private void confirmRemoveRegistration(Registration registration) {
@@ -594,15 +580,17 @@ public class EventDetailsActivity extends AppCompatActivity {
         if (registration == null || registration.getUserId() == null) return;
 
         binding.progressBarDetails.setVisibility(View.VISIBLE);
-        registrationRepository.removeRegistration(eventId, registration.getUserId())
-                .addOnSuccessListener(aVoid -> {
-                    binding.progressBarDetails.setVisibility(View.GONE);
-                    Toast.makeText(this, R.string.registration_removed, Toast.LENGTH_SHORT).show();
-                    // Realtime listener will auto-refresh
-                })
-                .addOnFailureListener(e -> {
-                    binding.progressBarDetails.setVisibility(View.GONE);
-                    Toast.makeText(this, ErrorMapper.toResId(e.getMessage()), Toast.LENGTH_SHORT).show();
+        detailViewModel.removeRegistration(eventId, registration.getUserId(),
+                new EventDetailViewModel.OperationCallback() {
+                    @Override public void onSuccess() {
+                        binding.progressBarDetails.setVisibility(View.GONE);
+                        Toast.makeText(EventDetailsActivity.this, R.string.registration_removed, Toast.LENGTH_SHORT).show();
+                        // Realtime listener will auto-refresh
+                    }
+                    @Override public void onError(String errorCode) {
+                        binding.progressBarDetails.setVisibility(View.GONE);
+                        Toast.makeText(EventDetailsActivity.this, ErrorMapper.toResId(errorCode), Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
@@ -613,19 +601,20 @@ public class EventDetailsActivity extends AppCompatActivity {
         final String operationUid = currentUid;
         binding.btnDeleteEvent.setEnabled(false);
         binding.progressBarDetails.setVisibility(View.VISIBLE);
-        eventRepository.deleteEvent(eventId)
-                .addOnSuccessListener(aVoid -> {
-                    registrationOperationInProgress = false;
-                    if (isDestroyed() || !operationUid.equals(currentUid)) return;
-                    binding.progressBarDetails.setVisibility(View.GONE);
-                    Toast.makeText(this, R.string.event_deleted, Toast.LENGTH_SHORT).show();
-                    finish();
-                })
-                .addOnFailureListener(e -> {
-                    registrationOperationInProgress = false;
-                    if (isDestroyed() || !operationUid.equals(currentUid)) return;
-                    showDetailsMessage(ErrorMapper.toResId(e.getMessage()), true);
-                });
+        detailViewModel.deleteEvent(eventId, new EventDetailViewModel.OperationCallback() {
+            @Override public void onSuccess() {
+                registrationOperationInProgress = false;
+                if (isDestroyed() || !operationUid.equals(currentUid)) return;
+                binding.progressBarDetails.setVisibility(View.GONE);
+                Toast.makeText(EventDetailsActivity.this, R.string.event_deleted, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            @Override public void onError(String errorCode) {
+                registrationOperationInProgress = false;
+                if (isDestroyed() || !operationUid.equals(currentUid)) return;
+                showDetailsMessage(ErrorMapper.toResId(errorCode), true);
+            }
+        });
     }
 
     private String formatEventDate(Event event) {

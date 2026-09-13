@@ -242,7 +242,10 @@ public class EventAdapter extends ListAdapter<Event, EventAdapter.EventViewHolde
                 long current = event.getCurrentParticipants();
                 long seatsLeft = Math.max(0, max - current);
                 binding.tvEventSpots.setText(
-                        itemView.getContext().getString(R.string.event_available_short, seatsLeft));
+                itemView.getResources().getQuantityString(
+                        R.plurals.event_available_short,
+                        (int) Math.min(seatsLeft, Integer.MAX_VALUE),
+                        seatsLeft));
 
                 LinearProgressIndicator progress = binding.progressCapacity;
                 if (max > 0) {

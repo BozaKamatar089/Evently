@@ -89,7 +89,9 @@ public final class VerificationViewModel extends ViewModel {
         repository.submitRequest(organization.trim(),proof.getValue()).addOnCompleteListener(callbacks, task->{
             if(token!=generation)return;
             busy.setValue(false);
-            if(task.isSuccessful()){resubmitting=false;retry();}
+            // The active listenMyRequest listener already delivers the created request;
+            // re-subscribing here would duplicate that read.
+            if(task.isSuccessful()){resubmitting=false;}
             else error.setValue("VERIFICATION_ERROR");
         });
     }
@@ -99,7 +101,9 @@ public final class VerificationViewModel extends ViewModel {
         repository.cancelRequest(uid).addOnCompleteListener(callbacks, task->{
             if(token!=generation)return;
             busy.setValue(false);
-            if(task.isSuccessful()){proof.setValue(null);resubmitting=false;retry();}
+            // The active listenMyRequest listener already delivers the deletion (request=null
+            // -> empty state); re-subscribing here would duplicate that read.
+            if(task.isSuccessful()){proof.setValue(null);resubmitting=false;}
             else error.setValue("VERIFICATION_ERROR");
         });
     }
