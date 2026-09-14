@@ -1,4 +1,5 @@
 import java.util.Properties
+import java.util.Base64
 
 plugins {
     alias(libs.plugins.android.application)
@@ -13,6 +14,25 @@ val cloudinaryProps = Properties().apply {
 val cloudinaryCloudName = cloudinaryProps.getProperty("cloudinary.cloudName", "")
 val cloudinaryUploadPreset = cloudinaryProps.getProperty("cloudinary.uploadPreset", "")
 
+// Release credentials stay in a Git-ignored local file and are never committed.
+val releaseSigningFile = rootProject.file("signing.properties")
+val releaseSigningProps = Properties().apply {
+    if (releaseSigningFile.exists()) {
+        releaseSigningFile.inputStream().use { load(it) }
+    }
+}
+val hasReleaseSigning = releaseSigningFile.exists()
+
+fun requiredSigningProperty(name: String): String =
+    releaseSigningProps.getProperty(name)?.takeIf { it.isNotBlank() }
+        ?: throw GradleException("Missing '$name' in signing.properties")
+
+fun decodedSigningSecret(name: String): String = try {
+    String(Base64.getDecoder().decode(requiredSigningProperty(name)), Charsets.UTF_8)
+} catch (error: IllegalArgumentException) {
+    throw GradleException("Invalid Base64 value for '$name' in signing.properties", error)
+}
+
 android {
     namespace = "com.example.evently"
     compileSdk {
@@ -23,6 +43,17 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+    }
+
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = rootProject.file(requiredSigningProperty("storeFile"))
+                storePassword = decodedSigningSecret("storePasswordBase64")
+                keyAlias = requiredSigningProperty("keyAlias")
+                keyPassword = decodedSigningSecret("keyPasswordBase64")
+            }
+        }
     }
 
     defaultConfig {
@@ -40,6 +71,9 @@ android {
 
     buildTypes {
         release {
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

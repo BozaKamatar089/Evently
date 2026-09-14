@@ -14,4 +14,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+/signing.properties
+*.jks
+*.keystore
+*.p12
 firestore-debug.log
