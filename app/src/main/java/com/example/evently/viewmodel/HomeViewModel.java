@@ -7,19 +7,40 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.evently.data.model.Event;
+import com.example.evently.domain.event.EventCategory;
+import com.example.evently.domain.event.EventDiscoveryPolicy;
 import com.example.evently.domain.event.EventRepository;
+import com.example.evently.domain.event.HomeDiscoveryState;
 import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class HomeViewModel extends ViewModel {
 
+    public enum EmptyReason {
+        NO_EVENTS,
+        NO_UPCOMING,
+        NO_SEARCH_RESULTS,
+        NO_FILTER_RESULTS
+    }
+
+    interface TimeProvider {
+        long now();
+    }
+
     private final EventRepository eventRepository;
+    private final TimeProvider timeProvider;
+    private final TimeZone timeZone;
+    private final Locale locale;
 
     private final MutableLiveData<List<Event>> events = new MutableLiveData<>();
     private final MutableLiveData<ListScreenState> state = new MutableLiveData<>(ListScreenState.loading());
+    private final MutableLiveData<HomeDiscoveryState> discoveryState =
+            new MutableLiveData<>(HomeDiscoveryState.defaults());
+    private final MutableLiveData<EmptyReason> emptyReason = new MutableLiveData<>();
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(true);
     private final MutableLiveData<String> error = new MutableLiveData<>();
 
@@ -28,11 +49,16 @@ public class HomeViewModel extends ViewModel {
     private int generation;
     private boolean hasSuccessfulData;
 
-    private String query = "";
-    private String category = "";
-
     public HomeViewModel(@NonNull EventRepository eventRepository) {
+        this(eventRepository, System::currentTimeMillis, TimeZone.getDefault(), Locale.getDefault());
+    }
+
+    HomeViewModel(@NonNull EventRepository eventRepository, @NonNull TimeProvider timeProvider,
+                  @NonNull TimeZone timeZone, @NonNull Locale locale) {
         this.eventRepository = eventRepository;
+        this.timeProvider = timeProvider;
+        this.timeZone = timeZone;
+        this.locale = locale;
     }
 
     public void startListening() {
@@ -71,33 +97,58 @@ public class HomeViewModel extends ViewModel {
     public void showAuxiliaryError(@NonNull String code) { stopListening(); loading.setValue(false); error.setValue(code); state.setValue(ListScreenState.error(code)); }
 
     public void setSearchQuery(@Nullable String text) {
-        query = text != null ? text.trim().toLowerCase(Locale.ROOT) : "";
+        HomeDiscoveryState current = requireDiscoveryState();
+        discoveryState.setValue(current.withQuery(text));
         applyFilter();
     }
 
-    public void setCategoryFilter(@Nullable String category) {
-        this.category = category != null ? category : "";
+    public void setCategoryFilter(@Nullable EventCategory category) {
+        discoveryState.setValue(requireDiscoveryState().withCategory(category));
+        applyFilter();
+    }
+
+    public void setDateFilter(@NonNull HomeDiscoveryState.DateFilter dateFilter) {
+        discoveryState.setValue(requireDiscoveryState().withDateFilter(dateFilter));
+        applyFilter();
+    }
+
+    public void setSortOrder(@NonNull HomeDiscoveryState.SortOrder sortOrder) {
+        discoveryState.setValue(requireDiscoveryState().withSortOrder(sortOrder));
+        applyFilter();
+    }
+
+    public void resetDiscovery() {
+        discoveryState.setValue(HomeDiscoveryState.defaults());
         applyFilter();
     }
 
     private void applyFilter() {
         if (!hasSuccessfulData) return;
-        List<Event> filtered = new ArrayList<>();
-        for (Event event : allEvents) {
-            boolean categoryMatch = category.isEmpty() || com.example.evently.domain.event.EventCategory.matches(category, event.getCategory());
-            boolean queryMatch = query.isEmpty()
-                    || (event.getTitle() != null && event.getTitle().toLowerCase(Locale.ROOT).contains(query))
-                    || (event.getLocation() != null && event.getLocation().toLowerCase(Locale.ROOT).contains(query));
-            if (categoryMatch && queryMatch && !isDeleted(event)) {
-                filtered.add(event);
-            }
-        }
+        HomeDiscoveryState current = requireDiscoveryState();
+        List<Event> filtered = EventDiscoveryPolicy.apply(
+                allEvents, current, timeProvider.now(), timeZone, locale);
         events.setValue(filtered);
+        emptyReason.setValue(filtered.isEmpty() ? determineEmptyReason(current) : null);
         state.setValue(ListScreenState.data(filtered));
     }
 
-    private boolean isDeleted(Event event) {
-        return Event.STATUS_DELETED.equals(event.getStatus());
+    @NonNull
+    private HomeDiscoveryState requireDiscoveryState() {
+        HomeDiscoveryState current = discoveryState.getValue();
+        return current != null ? current : HomeDiscoveryState.defaults();
+    }
+
+    @NonNull
+    private EmptyReason determineEmptyReason(@NonNull HomeDiscoveryState current) {
+        if (allEvents.isEmpty()) return EmptyReason.NO_EVENTS;
+        if (!EventDiscoveryPolicy.normalize(current.getQuery()).isEmpty()) {
+            return EmptyReason.NO_SEARCH_RESULTS;
+        }
+        if (current.getCategory() == null
+                && current.getDateFilter() == HomeDiscoveryState.DateFilter.UPCOMING) {
+            return EmptyReason.NO_UPCOMING;
+        }
+        return EmptyReason.NO_FILTER_RESULTS;
     }
 
     public LiveData<List<Event>> getEvents() {
@@ -112,6 +163,8 @@ public class HomeViewModel extends ViewModel {
         return error;
     }
     public LiveData<ListScreenState> getState() { return state; }
+    public LiveData<HomeDiscoveryState> getDiscoveryState() { return discoveryState; }
+    public LiveData<EmptyReason> getEmptyReason() { return emptyReason; }
 
     @Override
     protected void onCleared() {

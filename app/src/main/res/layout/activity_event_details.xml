@@ -241,6 +241,65 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEventUtilities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:orientation="vertical">
+
+                    <com.example.evently.ui.views.AccessibleHeadingTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_actions_title"
+                        android:textAppearance="@style/TextAppearance.Evently.EventTitle" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnShareEvent"
+                                style="@style/Widget.Evently.ActionRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:text="@string/event_action_share"
+                                app:icon="@drawable/ic_share"
+                                app:iconTint="?attr/colorOnSurfaceVariant" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAddToCalendar"
+                                style="@style/Widget.Evently.ActionRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:enabled="false"
+                                android:text="@string/event_action_calendar"
+                                app:icon="@drawable/ic_calendar"
+                                app:iconTint="?attr/colorOnSurfaceVariant" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnOpenInMaps"
+                                style="@style/Widget.Evently.ActionRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:enabled="false"
+                                android:text="@string/event_action_maps"
+                                app:icon="@drawable/ic_map"
+                                app:iconTint="?attr/colorOnSurfaceVariant" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/layoutOrganizerButtons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discovery_clear_search">Očisti pretragu</string>
+    <string name="discovery_category">Kategorija</string>
+    <string name="discovery_all">Sve</string>
+    <string name="discovery_category_all">Kategorija: Sve</string>
+    <string name="discovery_category_value">Kategorija: %1$s</string>
+    <string name="discovery_date">Datum</string>
+    <string name="discovery_date_upcoming">Datum: Predstojeći</string>
+    <string name="discovery_date_today">Danas</string>
+    <string name="discovery_date_this_week">Ove sedmice</string>
+    <string name="discovery_date_all">Svi događaji</string>
+    <string name="discovery_date_value">Datum: %1$s</string>
+    <string name="discovery_sort">Sortiranje</string>
+    <string name="discovery_sort_soonest">Sortiranje: Najbliži</string>
+    <string name="discovery_sort_newest">Najnoviji</string>
+    <string name="discovery_sort_value">Sortiranje: %1$s</string>
+    <string name="discovery_soonest">Najbliži</string>
+    <string name="discovery_reset">Resetuj</string>
+    <string name="discovery_section_upcoming">Predstojeći događaji</string>
+    <string name="discovery_section_today">Današnji događaji</string>
+    <string name="discovery_section_this_week">Događaji ove sedmice</string>
+    <string name="discovery_section_all">Svi događaji</string>
+    <string name="discovery_empty_upcoming_title">Nema predstojećih događaja</string>
+    <string name="discovery_empty_upcoming_body">Trenutno nema događaja od danas nadalje.</string>
+    <string name="discovery_empty_filter_title">Nema podudaranja</string>
+    <string name="discovery_empty_filter_body">Promijeni odabrane filtere ili ih resetuj.</string>
+    <string name="discovery_show_all">Prikaži sve događaje</string>
+    <string name="event_actions_title">Korisne radnje</string>
+    <string name="event_action_share">Podijeli</string>
+    <string name="event_action_share_chooser">Podijeli događaj putem</string>
+    <string name="event_action_share_intro">Pogledaj „%1$s” na Eventlyju</string>
+    <string name="event_action_calendar">Dodaj u kalendar</string>
+    <string name="event_action_maps">Otvori u mapama</string>
+    <string name="event_action_date_missing">Datum događaja nije dostupan.</string>
+    <string name="event_action_location_missing">Lokacija događaja nije dostupna.</string>
+    <string name="event_action_unavailable">Nijedna odgovarajuća aplikacija nije dostupna.</string>
+</resources>

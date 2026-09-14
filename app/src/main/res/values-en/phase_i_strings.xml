@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discovery_clear_search">Clear search</string>
+    <string name="discovery_category">Category</string>
+    <string name="discovery_all">All</string>
+    <string name="discovery_category_all">Category: All</string>
+    <string name="discovery_category_value">Category: %1$s</string>
+    <string name="discovery_date">Date</string>
+    <string name="discovery_date_upcoming">Date: Upcoming</string>
+    <string name="discovery_date_today">Today</string>
+    <string name="discovery_date_this_week">This week</string>
+    <string name="discovery_date_all">All events</string>
+    <string name="discovery_date_value">Date: %1$s</string>
+    <string name="discovery_sort">Sort</string>
+    <string name="discovery_sort_soonest">Sort: Soonest</string>
+    <string name="discovery_sort_newest">Newest</string>
+    <string name="discovery_sort_value">Sort: %1$s</string>
+    <string name="discovery_soonest">Soonest</string>
+    <string name="discovery_reset">Reset</string>
+    <string name="discovery_section_upcoming">Upcoming events</string>
+    <string name="discovery_section_today">Today’s events</string>
+    <string name="discovery_section_this_week">This week’s events</string>
+    <string name="discovery_section_all">All events</string>
+    <string name="discovery_empty_upcoming_title">No upcoming events</string>
+    <string name="discovery_empty_upcoming_body">There are no events scheduled from today onward.</string>
+    <string name="discovery_empty_filter_title">No matches</string>
+    <string name="discovery_empty_filter_body">Change the selected filters or reset them.</string>
+    <string name="discovery_show_all">Show all events</string>
+    <string name="event_actions_title">Useful actions</string>
+    <string name="event_action_share">Share</string>
+    <string name="event_action_share_chooser">Share event with</string>
+    <string name="event_action_share_intro">Check out “%1$s” on Evently</string>
+    <string name="event_action_calendar">Add to calendar</string>
+    <string name="event_action_maps">Open in maps</string>
+    <string name="event_action_date_missing">The event date is unavailable.</string>
+    <string name="event_action_location_missing">The event location is unavailable.</string>
+    <string name="event_action_unavailable">No suitable app is available.</string>
+</resources>

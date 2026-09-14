@@ -24,6 +24,7 @@ import com.example.evently.ui.adapters.RegistrationAdapter;
 import com.example.evently.util.PendingActionManager;
 import com.example.evently.util.AuthGate;
 import com.example.evently.util.EventActionEligibility;
+import com.example.evently.util.EventPlatformActions;
 import com.google.android.material.button.MaterialButton;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.evently.viewmodel.EventDetailViewModel;
@@ -122,6 +123,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
 
         setupToolbar();
+        setupPlatformActions();
 
         // Check for auto-register intent from login replay
         checkAutoRegister();
@@ -145,6 +147,36 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> finish());
+    }
+
+    private void setupPlatformActions() {
+        binding.btnShareEvent.setOnClickListener(v -> {
+            if (currentEvent != null) {
+                showPlatformActionResult(EventPlatformActions.share(
+                        this, currentEvent, formatEventDate(currentEvent)));
+            }
+        });
+        binding.btnAddToCalendar.setOnClickListener(v -> {
+            if (currentEvent != null) {
+                showPlatformActionResult(EventPlatformActions.addToCalendar(this, currentEvent));
+            }
+        });
+        binding.btnOpenInMaps.setOnClickListener(v -> {
+            if (currentEvent != null) {
+                showPlatformActionResult(EventPlatformActions.openInMaps(this, currentEvent));
+            }
+        });
+    }
+
+    private void showPlatformActionResult(EventPlatformActions.Result result) {
+        int message;
+        switch (result) {
+            case MISSING_DATE: message = R.string.event_action_date_missing; break;
+            case MISSING_LOCATION: message = R.string.event_action_location_missing; break;
+            case NO_HANDLER: message = R.string.event_action_unavailable; break;
+            default: return;
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -231,6 +263,10 @@ public class EventDetailsActivity extends AppCompatActivity {
         binding.tvDetailDescription.setText(
                 event.getDescription() != null && !event.getDescription().isEmpty()
                         ? event.getDescription() : getString(R.string.event_no_description));
+        binding.btnShareEvent.setEnabled(true);
+        binding.btnAddToCalendar.setEnabled(event.getDateLong() > 0L);
+        binding.btnOpenInMaps.setEnabled(event.getLocation() != null
+                && !event.getLocation().trim().isEmpty());
 
         if (event.getCategory() != null && !event.getCategory().isEmpty()) {
             binding.chipDetailCategory.setText(com.example.evently.ui.views.EventCategoryLabels.display(this, event.getCategory()));

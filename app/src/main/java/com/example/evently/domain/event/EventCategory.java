@@ -34,6 +34,16 @@ public enum EventCategory {
                 && filter.trim().equalsIgnoreCase(stored.trim());
     }
 
+    /** Comparison-only search surface; the original Firestore value is never rewritten. */
+    public static String searchText(String stored) {
+        if (stored == null) return "";
+        EventCategory category = fromStored(stored);
+        if (category == null) return stored;
+        StringBuilder searchable = new StringBuilder(stored).append(' ').append(category.name());
+        for (String alias : category.aliases) searchable.append(' ').append(alias);
+        return searchable.toString();
+    }
+
     /** Keeps an existing legacy identity unless the organizer explicitly picks a category. */
     public static String valueForEdit(EventCategory selection, String existingStoredValue) {
         if (selection != null) return selection.storedValue();

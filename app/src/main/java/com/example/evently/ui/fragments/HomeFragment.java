@@ -18,9 +18,12 @@ import com.example.evently.data.favorites.FavoriteRepositoryImpl;
 import com.example.evently.data.AppDependencies;
 import com.example.evently.databinding.FragmentHomeBinding;
 import com.example.evently.domain.event.EventRepository;
+import com.example.evently.domain.event.EventCategory;
+import com.example.evently.domain.event.HomeDiscoveryState;
 import com.example.evently.ui.adapters.EventAdapter;
 import com.example.evently.ui.adapters.SkeletonAdapter;
 import com.example.evently.ui.activities.EventDetailsActivity;
+import com.example.evently.ui.views.EventCategoryLabels;
 import com.example.evently.util.ErrorMapper;
 import com.example.evently.viewmodel.HomeViewModel;
 import com.example.evently.viewmodel.HomeViewModelFactory;
@@ -31,6 +34,7 @@ import com.example.evently.viewmodel.SessionViewModelFactory;
 import com.example.evently.util.PendingActionManager;
 import com.example.evently.util.AuthGate;
 import com.example.evently.ui.auth.LoginActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class HomeFragment extends Fragment {
 
@@ -66,6 +70,7 @@ public class HomeFragment extends Fragment {
 
         setupRecyclerView();
         setupSearch();
+        setupDiscoveryControls();
         observeViewModel();
         sessionViewModel.getState().observe(getViewLifecycleOwner(), this::renderSession);
     }
@@ -92,8 +97,16 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void setupDiscoveryControls() {
+        binding.chipCategoryFilter.setOnClickListener(v -> showCategoryDialog());
+        binding.chipDateFilter.setOnClickListener(v -> showDateDialog());
+        binding.chipSortOrder.setOnClickListener(v -> showSortDialog());
+        binding.chipResetDiscovery.setOnClickListener(v -> viewModel.resetDiscovery());
+    }
+
     private void observeViewModel() {
         viewModel.getState().observe(getViewLifecycleOwner(), this::renderListState);
+        viewModel.getDiscoveryState().observe(getViewLifecycleOwner(), this::renderDiscoveryControls);
         favoriteActionViewModel.getFavoriteIds().observe(getViewLifecycleOwner(), adapter::setFavoriteIds);
         favoriteActionViewModel.getStreamError().observe(getViewLifecycleOwner(), failed -> { if(Boolean.TRUE.equals(failed)) viewModel.showAuxiliaryError("FAVORITE_LOAD_ERROR"); });
 
@@ -161,13 +174,129 @@ public class HomeFragment extends Fragment {
             adapter.submitList(state.getEvents());
             binding.recyclerViewEvents.setVisibility(state.getStatus() == com.example.evently.viewmodel.ListScreenState.Status.CONTENT ? View.VISIBLE : View.GONE);
             if (state.getStatus() == com.example.evently.viewmodel.ListScreenState.Status.EMPTY) {
-                boolean searching = binding.etSearch.getText() != null
-                        && !binding.etSearch.getText().toString().trim().isEmpty();
-                binding.emptyStateHome.show(R.drawable.mascot_search,
-                        getString(searching ? R.string.state_empty_search_title : R.string.state_empty_events_title),
-                        getString(searching ? R.string.state_empty_search_body : R.string.state_empty_events_body));
+                renderEmptyState();
             }
         }
+    }
+
+    private void renderEmptyState() {
+        HomeViewModel.EmptyReason reason = viewModel.getEmptyReason().getValue();
+        if (reason == HomeViewModel.EmptyReason.NO_UPCOMING) {
+            binding.emptyStateHome.show(R.drawable.mascot_search,
+                    getString(R.string.discovery_empty_upcoming_title),
+                    getString(R.string.discovery_empty_upcoming_body),
+                    R.string.discovery_show_all,
+                    v -> viewModel.setDateFilter(HomeDiscoveryState.DateFilter.ALL));
+        } else if (reason == HomeViewModel.EmptyReason.NO_SEARCH_RESULTS) {
+            binding.emptyStateHome.show(R.drawable.mascot_search,
+                    getString(R.string.state_empty_search_title),
+                    getString(R.string.state_empty_search_body),
+                    R.string.discovery_reset, v -> viewModel.resetDiscovery());
+        } else if (reason == HomeViewModel.EmptyReason.NO_FILTER_RESULTS) {
+            binding.emptyStateHome.show(R.drawable.mascot_search,
+                    getString(R.string.discovery_empty_filter_title),
+                    getString(R.string.discovery_empty_filter_body),
+                    R.string.discovery_reset, v -> viewModel.resetDiscovery());
+        } else {
+            binding.emptyStateHome.show(R.drawable.mascot_search,
+                    getString(R.string.state_empty_events_title),
+                    getString(R.string.state_empty_events_body));
+        }
+    }
+
+    private void renderDiscoveryControls(HomeDiscoveryState state) {
+        if (state == null) return;
+        String currentQuery = binding.etSearch.getText() == null
+                ? "" : binding.etSearch.getText().toString();
+        if (!currentQuery.equals(state.getQuery())) {
+            binding.etSearch.setText(state.getQuery());
+            binding.etSearch.setSelection(state.getQuery().length());
+        }
+
+        EventCategory category = state.getCategory();
+        binding.chipCategoryFilter.setText(category == null
+                ? getString(R.string.discovery_category_all)
+                : getString(R.string.discovery_category_value,
+                EventCategoryLabels.label(requireContext(), category)));
+        binding.chipCategoryFilter.setChecked(category != null);
+
+        binding.chipDateFilter.setText(dateChipText(state.getDateFilter()));
+        binding.chipDateFilter.setChecked(state.getDateFilter() != HomeDiscoveryState.DateFilter.UPCOMING);
+        binding.chipSortOrder.setText(state.getSortOrder() == HomeDiscoveryState.SortOrder.SOONEST
+                ? getString(R.string.discovery_sort_soonest)
+                : getString(R.string.discovery_sort_value, getString(R.string.discovery_sort_newest)));
+        binding.chipSortOrder.setChecked(state.getSortOrder() != HomeDiscoveryState.SortOrder.SOONEST);
+        binding.chipResetDiscovery.setVisibility(state.isDefault() ? View.GONE : View.VISIBLE);
+        binding.tvHomeSection.setText(sectionText(state.getDateFilter()));
+    }
+
+    private String dateChipText(HomeDiscoveryState.DateFilter filter) {
+        if (filter == HomeDiscoveryState.DateFilter.UPCOMING) {
+            return getString(R.string.discovery_date_upcoming);
+        }
+        int label = filter == HomeDiscoveryState.DateFilter.TODAY
+                ? R.string.discovery_date_today
+                : filter == HomeDiscoveryState.DateFilter.THIS_WEEK
+                ? R.string.discovery_date_this_week : R.string.discovery_date_all;
+        return getString(R.string.discovery_date_value, getString(label));
+    }
+
+    private int sectionText(HomeDiscoveryState.DateFilter filter) {
+        switch (filter) {
+            case TODAY: return R.string.discovery_section_today;
+            case THIS_WEEK: return R.string.discovery_section_this_week;
+            case ALL: return R.string.discovery_section_all;
+            default: return R.string.discovery_section_upcoming;
+        }
+    }
+
+    private void showCategoryDialog() {
+        HomeDiscoveryState state = viewModel.getDiscoveryState().getValue();
+        EventCategory selected = state == null ? null : state.getCategory();
+        EventCategory[] values = EventCategory.values();
+        String[] categoryLabels = EventCategoryLabels.choices(requireContext());
+        String[] labels = new String[categoryLabels.length + 1];
+        labels[0] = getString(R.string.discovery_all);
+        System.arraycopy(categoryLabels, 0, labels, 1, categoryLabels.length);
+        int checked = selected == null ? 0 : selected.ordinal() + 1;
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.discovery_category)
+                .setSingleChoiceItems(labels, checked, (dialog, which) -> {
+                    viewModel.setCategoryFilter(which == 0 ? null : values[which - 1]);
+                    dialog.dismiss();
+                }).show();
+    }
+
+    private void showDateDialog() {
+        HomeDiscoveryState state = viewModel.getDiscoveryState().getValue();
+        int checked = state == null ? 0 : state.getDateFilter().ordinal();
+        String[] labels = {
+                getString(R.string.discovery_section_upcoming),
+                getString(R.string.discovery_date_today),
+                getString(R.string.discovery_date_this_week),
+                getString(R.string.discovery_date_all)
+        };
+        HomeDiscoveryState.DateFilter[] values = HomeDiscoveryState.DateFilter.values();
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.discovery_date)
+                .setSingleChoiceItems(labels, checked, (dialog, which) -> {
+                    viewModel.setDateFilter(values[which]);
+                    dialog.dismiss();
+                }).show();
+    }
+
+    private void showSortDialog() {
+        HomeDiscoveryState state = viewModel.getDiscoveryState().getValue();
+        int checked = state == null ? 0 : state.getSortOrder().ordinal();
+        String[] labels = {getString(R.string.discovery_soonest),
+                getString(R.string.discovery_sort_newest)};
+        HomeDiscoveryState.SortOrder[] values = HomeDiscoveryState.SortOrder.values();
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.discovery_sort)
+                .setSingleChoiceItems(labels, checked, (dialog, which) -> {
+                    viewModel.setSortOrder(values[which]);
+                    dialog.dismiss();
+                }).show();
     }
     private void retryList(){viewModel.refresh();com.example.evently.domain.session.SessionState s=sessionViewModel.getState().getValue();if(s!=null&&s.isAuthenticated())favoriteActionViewModel.observeForUser(s.getUid());}
 
